@@ -1,0 +1,14 @@
+*,
+*::before,
+*::after {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  text-decoration: none;
+  user-select: none;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(90deg, #fc354c 0%, #0abfbc 100%);
+}
