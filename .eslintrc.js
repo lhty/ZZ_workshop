@@ -26,6 +26,11 @@ module.exports = {
         jsx: 'never',
       },
     ],
+
+    'no-return-assign': 2,
+    'no-param-reassign': 0,
+    'no-extra-parens': 0,
+    semi: [2, always, { omitLastInOneLineBlock: true }],
   },
   settings: {
     'import/resolver': {
