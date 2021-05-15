@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'Karla';
+  src: url('./fonts/Karla-Bold.ttf') format('truetype'), url('./fonts/Karla-BoldItalic.ttf') format('truetype'),
+    url('./fonts/Karla-ExtraBold.ttf') format('truetype'), url('./fonts/Karla-ExtraBoldItalic.ttf') format('truetype'),
+    url('./fonts/Karla-ExtraLight.ttf') format('truetype'), url('./fonts/Karla-ExtraLightItalic.ttf') format('truetype'),
+    url('./fonts/Karla-Italic.ttf') format('truetype'), url('./fonts/Karla-Light.ttf') format('truetype'),
+    url('./fonts/Karla-LightItalic.ttf') format('truetype'), url('./fonts/Karla-Medium.ttf') format('truetype'),
+    url('./fonts/Karla-MediumItalic.ttf') format('truetype'), url('./fonts/Karla-Regular.ttf') format('truetype'),
+    url('./fonts/Karla-SemiBold.ttf') format('truetype'), url('./fonts/Karla-SemiBoldItalic.ttf') format('truetype');
+}
+
+*,
+*::before,
+*::after {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Karla', sans-serif;
+}

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import cn from 'classnames';
-import s from './App.module.scss';
+import { Home } from './pages';
+import './styles/index.css';
 
 const App = () => {
-  return <div className={cn(s.header, 'color')}>Initial</div>;
+  return <Home />;
 };
 
 export default App;

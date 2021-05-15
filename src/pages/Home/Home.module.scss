@@ -1,0 +1,28 @@
+@import '../../styles/variables';
+
+.root {
+  min-height: 100vh;
+  background: linear-gradient(180deg, $third 0%, $primary 100%);
+}
+.contentWrap {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.contentText {
+  width: 50%;
+  font-family: Karla;
+  font-style: normal;
+  color: #000000;
+
+  &h1 {
+    font-weight: bold;
+    font-size: 72px;
+    line-height: 84px;
+    letter-spacing: 4px;
+  }
+  &p {
+    font-size: 36px;
+    line-height: 42px;
+  }
+}
