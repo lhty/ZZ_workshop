@@ -1,10 +1,16 @@
 @import '../../styles/variables';
+@import '../../styles/breakpoints';
 
 .root {
   height: 93px;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px 4px 16px rgba(1, 28, 64, 0.2);
+
+  @include media('<laptop') {
+    height: 150px;
+  }
 }
 
 .wrap {
@@ -14,6 +20,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  gap: 10px;
+
+  @include media('<laptop') {
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .pokemonLogo {

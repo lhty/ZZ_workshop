@@ -1,27 +1,48 @@
 @import '../../styles/variables';
+@import '../../styles/breakpoints';
 
 .root {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
   min-height: 100vh;
   background: linear-gradient(180deg, $third 0%, $primary 100%);
+  overflow: hidden;
+  user-select: none;
+
+  @include media('>desktop') {
+    gap: 100px;
+  }
 }
 .contentWrap {
   display: flex;
-  align-items: center;
-  overflow: hidden;
+  justify-items: center;
+  min-width: 100%;
+  margin-bottom: 50px;
+
+  @include media('<laptop') {
+    flex-direction: column-reverse;
+  }
 }
 .contentText {
-  width: 50%;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  align-self: center;
+  gap: 30px;
+  max-width: 50%;
+  min-width: 514px;
   font-family: Karla;
   font-style: normal;
   color: #000000;
 
-  &h1 {
-    font-weight: bold;
+  h1 {
     font-size: 72px;
-    line-height: 84px;
+    font-weight: 100;
+    line-height: 72px;
     letter-spacing: 4px;
   }
-  &p {
+  p {
     font-size: 36px;
     line-height: 42px;
   }
