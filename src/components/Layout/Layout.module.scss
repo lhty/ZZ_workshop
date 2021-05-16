@@ -1,0 +1,15 @@
+@import '../../styles/breakpoints';
+
+.root {
+  width: 100%;
+  max-width: 1280px;
+  padding: 0;
+
+  @include media('>laptop') {
+    padding: 0 50px;
+  }
+
+  @include media('>desktop') {
+    padding: 0 250px;
+  }
+}

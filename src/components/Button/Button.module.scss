@@ -1,0 +1,61 @@
+.root {
+  border: none;
+  outline: 0;
+  border-radius: 11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-family: Karla;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #212121;
+
+  transition: 0.15s ease-in-out;
+}
+
+.link {
+  background: #73d677;
+}
+
+.primary {
+  background: #07d6f2;
+}
+
+.secondary {
+  background: #f2cb07;
+}
+
+.default {
+  height: 66px;
+  font-size: 23px;
+  padding: 0 20px 9px;
+  box-shadow: inset 0px -9px 0px rgba(0, 0, 0, 0.18);
+
+  &:active,
+  &:focus {
+    box-shadow: inset 0px -6px 0px rgba(0, 0, 0, 0.18);
+    padding-bottom: 6px;
+  }
+}
+
+.small {
+  height: 30px;
+  font-size: 16px;
+  padding: 0 20px 4px;
+  box-shadow: inset 0px -4px 0px rgba(0, 0, 0, 0.18);
+
+  &:active,
+  &:focus {
+    box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.18);
+    padding-bottom: 2px;
+  }
+}
+
+.fullsize {
+  width: 100%;
+}

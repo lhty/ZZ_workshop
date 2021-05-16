@@ -26,11 +26,12 @@ module.exports = {
         jsx: 'never',
       },
     ],
-
     'no-return-assign': 2,
     'no-param-reassign': 0,
     'no-extra-parens': 0,
-    semi: [2, always, { omitLastInOneLineBlock: true }],
+    'import/prefer-default-export': 0,
+    'react/require-default-props': 0,
+    'react/prop-types': [0, { ignore: ['children', 'className'] }],
   },
   settings: {
     'import/resolver': {
