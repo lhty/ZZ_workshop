@@ -5,8 +5,8 @@ interface Props {
   className?: string | null;
 }
 
-const Heading: React.FC<Props> = ({ children, type = 'h1', className = null }) => {
+const Typography: React.FC<Props> = ({ children, type = 'h1', className = null }) => {
   return React.createElement(type, { className }, children);
 };
 
-export default Heading;
+export default Typography;

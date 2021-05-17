@@ -1,20 +1,18 @@
 import React from 'react';
 
-import { Button, Footer, Header, Heading, Layout, Parallax } from '../../components';
+import { Button, Footer, Header, Typography, Layout, Parallax } from '../../components';
 import styles from './Home.module.scss';
 
-interface Props {}
-
-const Home = (props: Props) => {
+const Home = () => {
   return (
     <main className={styles.root}>
       <Header />
       <Layout className={styles.contentWrap}>
         <div className={styles.contentText}>
-          <Heading>
+          <Typography>
             <b>Find</b> all your favorite <b>Pokemon</b>
-          </Heading>
-          <p>You can know the type of Pokemon, its strengths, disadvantages and abilities</p>
+          </Typography>
+          <Typography type="p">You can know the type of Pokemon, its strengths, disadvantages and abilities</Typography>
           <Button onClick={() => null}>See pokemons</Button>
         </div>
         <Parallax />

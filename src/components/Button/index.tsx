@@ -7,15 +7,15 @@ interface Props {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   variant?: 'primary' | 'secondary' | 'link';
   size?: 'default' | 'small';
-  fullSize?: boolean;
+  isLong?: boolean;
 }
 
-const Button: React.FC<Props> = ({ children, onClick, variant = 'link', size = 'default', fullSize = false }) => {
+const Button: React.FC<Props> = ({ children, onClick, variant = 'link', size = 'default', isLong = false }) => {
   return (
     <button
       onClick={onClick}
       type="button"
-      className={cn(styles.root, styles[variant], styles[size], fullSize && styles.fullsize)}>
+      className={cn(styles.root, styles[variant], styles[size], isLong && styles.fullsize)}>
       {children}
     </button>
   );

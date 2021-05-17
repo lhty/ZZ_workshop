@@ -7,13 +7,14 @@ import CloudPng from './assets/Cloud1.png';
 import PokeBallPng from './assets/Pokeball2.png';
 import PikachuPng from './assets/Pikachu.png';
 
+type Pos = { x: number; y: number };
+
 const Parallax = () => {
-  const [{ x, y }, setPos] = useReducer((_: any, update: any) => update, { x: 0, y: 0 });
+  const [{ x, y }, setPos] = useReducer((_: Pos, update: Pos) => update, { x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseWatcher = (e: MouseEvent) => setPos({ x: e.screenX, y: e.screenY });
     window.addEventListener('mousemove', handleMouseWatcher);
-
     return () => window.removeEventListener('mousemove', handleMouseWatcher);
   }, [x, y]);
 
