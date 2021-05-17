@@ -1,3 +1,4 @@
-import Home from './Home';
+import HomePage from './Home';
+import NotFoundPage from './404';
 
-export { Home };
+export { HomePage, NotFoundPage };

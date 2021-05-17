@@ -1,6 +1,8 @@
+import { navigate } from 'hookrouter';
 import React from 'react';
 
 import { Button, Footer, Header, Typography, Layout, Parallax } from '../../components';
+import { LinkEnum } from '../../routes';
 import styles from './Home.module.scss';
 
 const Home = () => {
@@ -13,7 +15,7 @@ const Home = () => {
             <b>Find</b> all your favorite <b>Pokemon</b>
           </Typography>
           <Typography type="p">You can know the type of Pokemon, its strengths, disadvantages and abilities</Typography>
-          <Button onClick={() => null}>See pokemons</Button>
+          <Button onClick={() => navigate(LinkEnum.POKEDEX)}>See pokemons</Button>
         </div>
         <Parallax />
       </Layout>

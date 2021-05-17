@@ -32,6 +32,8 @@ module.exports = {
     'import/prefer-default-export': 0,
     'react/require-default-props': 0,
     'react/prop-types': [0, { ignore: ['children', 'className'] }],
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
   },
   settings: {
     'import/resolver': {

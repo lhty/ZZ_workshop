@@ -4,5 +4,6 @@ import Header from './Header';
 import Layout from './Layout';
 import Parallax from './Parallax';
 import Typography from './Typography';
+import Card from './Card';
 
-export { Header, Layout, Button, Parallax, Footer, Typography };
+export { Header, Layout, Button, Parallax, Footer, Typography, Card };

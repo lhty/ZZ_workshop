@@ -1,10 +1,15 @@
 import React from 'react';
 
-import { Home } from './pages';
+import { useRoutes } from 'hookrouter';
+import ROUTES from './routes';
+
 import './styles/index.css';
+import { NotFoundPage } from './pages';
 
 const App = () => {
-  return <Home />;
+  const matchUrl = useRoutes(ROUTES);
+
+  return matchUrl || <NotFoundPage />;
 };
 
 export default App;
