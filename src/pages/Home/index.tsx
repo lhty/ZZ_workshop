@@ -14,7 +14,9 @@ const Home = () => {
           <Typography>
             <b>Find</b> all your favorite <b>Pokemon</b>
           </Typography>
-          <Typography type="p">You can know the type of Pokemon, its strengths, disadvantages and abilities</Typography>
+          <Typography variant="p">
+            You can know the type of Pokemon, its strengths, disadvantages and abilities
+          </Typography>
           <Button onClick={() => navigate(LinkEnum.POKEDEX)}>See pokemons</Button>
         </div>
         <Parallax />

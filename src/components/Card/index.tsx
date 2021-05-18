@@ -9,7 +9,7 @@ const Card: React.FC<Partial<IPokemon>> = ({ name, img, stats, types }) => {
   return (
     <div className={styles.root}>
       <div className={styles.infoWrap}>
-        <Typography size="xs" className={styles.titleName}>
+        <Typography size="l" className={styles.titleName}>
           {name}
         </Typography>
         <div className={styles.statWrap}>
