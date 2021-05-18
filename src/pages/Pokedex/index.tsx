@@ -1,11 +1,18 @@
 import React from 'react';
 
-import { mockedPokemons } from '../../api/__mock__/pokemons';
+import { useQuery } from 'react-query';
+import { IPokemon } from '../../@types/pokemon';
+
+import { getPokemons } from '../../api';
+
+// import { mockedPokemons } from '../../api/__mock__/pokemons';
 import { Card, Header, Layout, Typography } from '../../components';
 
 import styles from './Pokedex.module.scss';
 
 const Pokedex = () => {
+  const { isLoading, isError, data } = useQuery<IPokemon[], Error>('pokemons', getPokemons);
+
   return (
     <div className={styles.root}>
       <Header />
@@ -22,11 +29,15 @@ const Pokedex = () => {
             <option value="water">Water</option>
           </select>
         </div>
-        <div className={styles.contentWrap}>
-          {mockedPokemons.map(({ id, ...rest }) => (
-            <Card key={id} {...{ ...rest }} />
-          ))}
-        </div>
+        {isLoading || isError ? (
+          <>Loading ...</>
+        ) : (
+          <div className={styles.contentWrap}>
+            {data?.map(({ id, ...rest }) => (
+              <Card key={id} {...{ ...rest }} />
+            ))}
+          </div>
+        )}
       </Layout>
     </div>
   );

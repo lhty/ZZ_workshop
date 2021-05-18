@@ -5,7 +5,7 @@ import { IPokemon } from '../../@types/pokemon';
 
 import styles from './Card.module.scss';
 
-const Card: React.FC<Partial<IPokemon>> = ({ name, img, stats, types }) => {
+const Card: React.FC<Partial<IPokemon>> = ({ name, sprites, stats, types }) => {
   return (
     <div className={styles.root}>
       <div className={styles.infoWrap}>
@@ -14,26 +14,26 @@ const Card: React.FC<Partial<IPokemon>> = ({ name, img, stats, types }) => {
         </Typography>
         <div className={styles.statWrap}>
           <div className={styles.statItem}>
-            <div className={styles.statValue}>{stats?.attack}</div>
+            <div className={styles.statValue}>123</div>
             Attack
           </div>
           <div className={styles.statItem}>
-            <div className={styles.statValue}>{stats?.defense}</div>
+            <div className={styles.statValue}>123</div>
             Defense
           </div>
         </div>
         {types?.length && (
           <div className={styles.labelWrap}>
-            {types?.map((type) => (
-              <span key={type} className={styles.label}>
-                {type}
+            {types?.map(({ slot, type }) => (
+              <span key={slot} className={styles.label}>
+                {type?.name}
               </span>
             ))}
           </div>
         )}
       </div>
       <div className={styles.pictureWrap}>
-        <img src={img} alt={name} />
+        <img src={sprites?.front_default} alt={sprites?.front_default} />
       </div>
     </div>
   );
