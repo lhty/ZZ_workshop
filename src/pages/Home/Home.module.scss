@@ -23,6 +23,14 @@
   @include media('<laptop') {
     flex-direction: column-reverse;
   }
+
+  @include media('>laptop') {
+    padding: 0 50px;
+  }
+
+  @include media('>desktop') {
+    padding: 0 250px;
+  }
 }
 .contentText {
   display: flex;

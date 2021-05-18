@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomePage } from './pages';
+import { HomePage, Pokedex } from './pages';
 
 export enum LinkEnum {
   HOME = '/',
@@ -20,7 +20,7 @@ interface IRoutes {
 
 export const MAIN_MENU: IMenuItem[] = [
   { title: 'Home', link: LinkEnum.HOME, component: () => <HomePage /> },
-  { title: 'Pokédex', link: LinkEnum.POKEDEX, component: () => <HomePage /> },
+  { title: 'Pokédex', link: LinkEnum.POKEDEX, component: () => <Pokedex /> },
   { title: 'Legendaries', link: LinkEnum.LEGENDARIES, component: () => <HomePage /> },
   { title: 'Documentation', link: LinkEnum.DOCUMENTATION, component: () => <HomePage /> },
 ];

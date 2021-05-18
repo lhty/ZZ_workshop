@@ -1,12 +1,11 @@
 .root {
-  width: 351px;
-  height: 136px;
+  position: relative;
+  display: flex;
+  flex-flow: column wrap;
   box-shadow: 4px 4px 4px rgba(33, 33, 33, 0.1);
   background: #f6f7f9;
   border-radius: 8px;
   overflow: hidden;
-  position: relative;
-  margin-bottom: 45px;
   cursor: pointer;
   transition: all ease-in-out 0.15s;
 
@@ -17,16 +16,16 @@
 }
 
 .infoWrap {
-  position: absolute;
+  width: 100%;
+  padding: 12px 25px;
   z-index: 1;
-  width: 150px;
-  top: 6px;
-  left: 25px;
 }
 
 .titleName {
   margin-bottom: 12px;
+  font-weight: normal;
   text-shadow: 4px 4px 4px rgba(33, 33, 33, 0.1);
+  text-transform: capitalize;
 }
 
 .statWrap {

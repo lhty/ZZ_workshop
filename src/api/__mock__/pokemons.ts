@@ -1,4 +1,4 @@
-export const pokemons = [
+export const mockedPokemons = [
   {
     name_clean: 'bulbasaur',
     abilities: ['overgrow', 'chlorophyll'],

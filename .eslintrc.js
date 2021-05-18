@@ -34,6 +34,12 @@ module.exports = {
     'react/prop-types': [0, { ignore: ['children', 'className'] }],
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['error'],
+    'react/jsx-props-no-spreading': [
+      0,
+      {
+        html: 'ignore',
+      },
+    ],
   },
   settings: {
     'import/resolver': {

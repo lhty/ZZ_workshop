@@ -7,7 +7,7 @@ import styles from './Home.module.scss';
 
 const Home = () => {
   return (
-    <main className={styles.root}>
+    <div className={styles.root}>
       <Header />
       <Layout className={styles.contentWrap}>
         <div className={styles.contentText}>
@@ -20,7 +20,7 @@ const Home = () => {
         <Parallax />
       </Layout>
       <Footer />
-    </main>
+    </div>
   );
 };
 
