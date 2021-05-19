@@ -1,9 +1,9 @@
 import React from 'react';
-
 import cn from 'classnames';
-import { Typography } from '..';
 
 import { IPokemon } from '../../@types/pokemon';
+
+import { Typography } from '..';
 
 import styles from './Card.module.scss';
 
@@ -63,7 +63,7 @@ const Card: React.FC<Partial<IPokemon>> = ({ name, stats, sprites, types }) => {
       <div
         className={styles.pictureWrap}
         style={{ background: `linear-gradient(270deg, ${bgColor} 0.15%,  #f6f7f9 100%)` }}>
-        <img src={sprites?.other?.['official-artwork'].front_default} alt={sprites?.front_default} />
+        <img src={sprites?.other?.['official-artwork'].front_default} alt={`${name} official-artwork`} />
       </div>
     </div>
   );

@@ -5,21 +5,40 @@ import { IPokemon } from '../../@types/pokemon';
 
 import { getPokemons } from '../../api';
 
-import { Card, Header, Layout, Typography } from '../../components';
+import { Card, Header, Highlight, Layout, Typography } from '../../components';
+import { useDebounce } from '../../hooks';
 
 import styles from './Pokedex.module.scss';
 
 const Pokedex = () => {
-  const { isLoading, isError, data } = useQuery<IPokemon[], Error>('pokemons', getPokemons);
+  const [query, setQuery] = React.useState('');
+  const lastQuery = useDebounce(query, 500);
+
+  const { isLoading, isError, data } = useQuery<IPokemon[], Error>(
+    'pokemons',
+    () => getPokemons({ query: lastQuery }),
+    {
+      keepPreviousData: true,
+    },
+  );
 
   return (
     <div className={styles.root}>
       <Header />
       <Layout className={styles.layerWrap}>
         <Typography className={styles.description}>
-          800 <b>Pokemons</b> for you to choose your favorite
+          800{' '}
+          <b>
+            <Highlight>Pokemons</Highlight>
+          </b>{' '}
+          for you to choose your favorite
         </Typography>
-        <input placeholder="Encuentra tu pokémon..." className={styles.search} type="text" />
+        <input
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
+          placeholder="Encuentra tu pokémon..."
+          className={styles.search}
+          type="text"
+        />
         <div className={styles.filters}>
           <select id="whatever">
             <option value="fire">Fire</option>

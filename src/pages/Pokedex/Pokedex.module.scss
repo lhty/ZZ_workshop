@@ -9,7 +9,7 @@
   display: flex;
   flex-flow: column wrap;
   margin: 60px auto 0;
-  gap: 50px;
+  gap: 35px;
 }
 
 .contentWrap {
@@ -32,13 +32,15 @@
 
 .search {
   width: 100%;
-  height: 53px;
+  height: 50px;
   background: #f2f2f2;
-  box-shadow: 5px 12px 13px -10px #2121214a;
+  box-shadow: 5px 9px 13px -10px #2121214a;
   border: none;
   border-radius: 40px;
-  padding: 15px;
+  padding: 5px 25px;
   outline: none;
+  font-size: 1.5rem;
+  font-weight: 300;
 }
 
 .description {
@@ -49,9 +51,10 @@
 
 .filters {
   display: flex;
+  justify-content: center;
 
   & select {
-    box-shadow: 2px 2px 2px rgba(33, 33, 33, 0.1);
+    box-shadow: 4px 6px 15px -7px #2121214a;
     border-radius: 4px;
     width: 135px;
     text-align-last: center;

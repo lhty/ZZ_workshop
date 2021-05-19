@@ -33,7 +33,6 @@ module.exports = {
     'react/require-default-props': 0,
     'react/prop-types': [0, { ignore: ['children', 'className'] }],
     'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error'],
     'react/jsx-props-no-spreading': [
       0,
       {
