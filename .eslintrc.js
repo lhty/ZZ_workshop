@@ -40,6 +40,7 @@ module.exports = {
         html: 'ignore',
       },
     ],
+    camelcase: 'off',
   },
   settings: {
     'import/resolver': {

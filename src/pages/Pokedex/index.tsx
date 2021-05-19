@@ -5,7 +5,6 @@ import { IPokemon } from '../../@types/pokemon';
 
 import { getPokemons } from '../../api';
 
-// import { mockedPokemons } from '../../api/__mock__/pokemons';
 import { Card, Header, Layout, Typography } from '../../components';
 
 import styles from './Pokedex.module.scss';

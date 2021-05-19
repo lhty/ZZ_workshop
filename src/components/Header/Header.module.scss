@@ -44,13 +44,14 @@
 }
 
 .menuLink {
-  font-style: normal;
-  font-weight: normal;
+  font-style: unset;
+  font-weight: 300;
   font-size: 25px;
-  line-height: 29px;
+  line-height: 28px;
   color: $dark;
   text-decoration: none;
   position: relative;
+  letter-spacing: -2px;
 
   &:after {
     content: '';

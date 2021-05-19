@@ -1,6 +1,7 @@
 @import '../../styles/breakpoints';
 
 .root {
+  min-height: 100vh;
   width: 100%;
 }
 
@@ -33,17 +34,17 @@
   width: 100%;
   height: 53px;
   background: #f2f2f2;
-  box-shadow: 4px 4px 16px rgba(1, 28, 64, 0.2);
+  box-shadow: 5px 12px 13px -10px #2121214a;
   border: none;
   border-radius: 40px;
   padding: 15px;
+  outline: none;
 }
 
 .description {
   align-self: center;
   font-size: 35px;
-  letter-spacing: 3px;
-  font-weight: normal;
+  font-weight: 300;
 }
 
 .filters {
