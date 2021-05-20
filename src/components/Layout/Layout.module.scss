@@ -5,11 +5,7 @@
   max-width: 1280px;
   padding: 0;
 
-  @include media('>laptop') {
-    padding: 0 50px;
-  }
-
   @include media('>desktop') {
-    padding: 0 250px;
+    max-width: 95%;
   }
 }

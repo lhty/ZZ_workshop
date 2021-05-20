@@ -2,10 +2,12 @@
 @import '../../styles/breakpoints';
 
 .root {
+  display: inline-flex;
   height: 93px;
-  display: flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
+  background-color: $third;
   box-shadow: 0px 4px 16px rgba(1, 28, 64, 0.2);
 
   @include media('<laptop') {
@@ -43,19 +45,20 @@
 }
 
 .menuLink {
-  font-style: normal;
-  font-weight: normal;
+  font-style: unset;
+  font-weight: 300;
   font-size: 25px;
-  line-height: 29px;
+  line-height: 28px;
   color: $dark;
   text-decoration: none;
   position: relative;
+  letter-spacing: -2px;
 
   &:after {
     content: '';
     display: block;
     position: absolute;
-    bottom: -8px;
+    bottom: -3px;
     height: 1px;
     width: 1%;
     background: $dark;

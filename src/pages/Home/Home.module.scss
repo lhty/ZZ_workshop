@@ -2,9 +2,6 @@
 @import '../../styles/breakpoints';
 
 .root {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
   min-height: 100vh;
   background: linear-gradient(180deg, $third 0%, $primary 100%);
   overflow: hidden;
@@ -22,6 +19,14 @@
 
   @include media('<laptop') {
     flex-direction: column-reverse;
+  }
+
+  @include media('>laptop') {
+    padding: 0 50px;
+  }
+
+  @include media('>desktop') {
+    padding: 0 250px;
   }
 }
 .contentText {

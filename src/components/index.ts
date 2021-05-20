@@ -1,8 +1,10 @@
 import Button from './Button';
 import Footer from './Footer';
 import Header from './Header';
-import Heading from './Heading';
 import Layout from './Layout';
 import Parallax from './Parallax';
+import Typography from './Typography';
+import Card from './Card';
+import Highlight from './Typography/Highlight';
 
-export { Header, Layout, Button, Parallax, Footer, Heading };
+export { Header, Layout, Button, Parallax, Footer, Typography, Highlight, Card };

@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;700;800&display=swap');
+@import './_variables.scss';
+
+*,
+*::before,
+*::after {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Karla', sans-serif;
+  font-style: normal;
+  overflow-x: hidden;
+  overflow-y: overlay;
+  color: $dark;
+
+  &::-webkit-scrollbar {
+    position: absolute;
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $third;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $dark;
+    border-radius: 10px;
+  }
+}

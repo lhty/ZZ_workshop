@@ -1,3 +1,5 @@
-import Home from './Home';
+import HomePage from './Home';
+import NotFoundPage from './404';
+import Pokedex from './Pokedex';
 
-export { Home };
+export { HomePage, Pokedex, NotFoundPage };

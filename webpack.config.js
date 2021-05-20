@@ -9,6 +9,7 @@ module.exports = {
     port: process.env.PORT || 3000,
     hot: true,
     open: true,
+    historyApiFallback: true,
   },
   devtool: 'source-map',
   resolve: {
@@ -27,10 +28,6 @@ module.exports = {
   module: {
     rules: [
       { test: /\.[tj]sx?$/, exclude: /node_modules/, use: ['ts-loader'] },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
       {
         test: /\.scss$/,
         use: [

@@ -1,26 +1,14 @@
 import React from 'react';
 
+import cn from 'classnames';
+
+import { A, usePath } from 'hookrouter';
+import { MAIN_MENU } from '../../routes';
+
 import { ReactComponent as Logo } from './assets/Logo.svg';
 import styles from './Header.module.scss';
 
-const MENU_ITEMS = [
-  { id: 0, value: 'Home', link: '#' },
-  { id: 1, value: 'Pokédex', link: '#' },
-  { id: 2, value: 'Legendaries', link: '#' },
-  { id: 3, value: 'Documentation', link: '#' },
-];
-
-type menuItem = {
-  id: number;
-  value: string;
-  link: string;
-};
-
-interface Props {
-  items?: Array<menuItem>;
-}
-
-const Header: React.FC<Props> = ({ items = MENU_ITEMS }) => {
+const Header: React.FC = () => {
   return (
     <header className={styles.root}>
       <div className={styles.wrap}>
@@ -28,15 +16,26 @@ const Header: React.FC<Props> = ({ items = MENU_ITEMS }) => {
           <Logo />
         </div>
         <div className={styles.menuWrap}>
-          {items.map(({ id, value, link }) => (
-            <a key={id} href={link} className={styles.menuLink}>
-              {value}
-            </a>
-          ))}
+          <NavMenu />
         </div>
       </div>
     </header>
   );
 };
 
-export default Header;
+// eslint-disable-next-line spaced-comment
+/* React 16 array return type no solution in TS without <></> hack so far(*/
+const NavMenu: React.FC = () => {
+  const path = usePath();
+  return (
+    <>
+      {MAIN_MENU.map(({ title, link }) => (
+        <A key={title + link} href={link} className={cn(styles.menuLink, { [styles.activeLink]: link === path })}>
+          {title}
+        </A>
+      ))}
+    </>
+  );
+};
+
+export default React.memo(Header);

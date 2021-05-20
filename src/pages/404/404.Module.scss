@@ -1,0 +1,48 @@
+@import '../../styles/variables';
+@import '../../styles/breakpoints';
+
+.root {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 20px;
+  min-height: 100vh;
+  overflow: hidden;
+  user-select: none;
+  background-color: $danger;
+
+  & img {
+    @include media('>tablet') {
+      position: absolute;
+      left: 53%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  & button {
+    align-self: center;
+    width: 230px;
+  }
+
+  & mark {
+    background-color: transparent;
+    color: #000;
+  }
+}
+.code {
+  align-self: center;
+  font-weight: bold;
+  font-size: clamp(36vw, 55vw, 700px);
+  display: flex;
+  align-items: center;
+  letter-spacing: 4px;
+
+  color: rgba(0, 0, 0, 0.5);
+}
+.text {
+  font-size: clamp(3vw, 3vw, 60px);
+  align-self: center;
+  color: #fff;
+}

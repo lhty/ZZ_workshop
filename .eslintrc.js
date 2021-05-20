@@ -32,6 +32,14 @@ module.exports = {
     'import/prefer-default-export': 0,
     'react/require-default-props': 0,
     'react/prop-types': [0, { ignore: ['children', 'className'] }],
+    'no-shadow': 'off',
+    'react/jsx-props-no-spreading': [
+      0,
+      {
+        html: 'ignore',
+      },
+    ],
+    camelcase: 'off',
   },
   settings: {
     'import/resolver': {
