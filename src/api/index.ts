@@ -3,14 +3,10 @@ import { IPokemon } from '../@types/pokemon';
 interface IgetPokemons {
   limit?: number;
   offset?: number;
-  query?: string;
 }
 
-const getPokemons = async ({ limit = 51, offset = 0, query = '' }: IgetPokemons): Promise<Array<IPokemon>> => {
-  const url = query
-    ? `https://pokeapi.co/api/v2/pokemon/${query}`
-    : `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
-  const PokemonData: IPokemon[] = await fetch(url)
+const getPokemons = async ({ limit = 51, offset = 0 }: IgetPokemons): Promise<Array<IPokemon>> => {
+  const PokemonData: IPokemon[] = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
     .then((response) => response.json())
     .then(({ results }) => {
       const promisesArray = results.map(async ({ url }: { url: string }) => {

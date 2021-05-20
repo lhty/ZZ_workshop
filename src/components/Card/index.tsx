@@ -31,7 +31,32 @@ const RGB_COLORS = new Map<string | undefined, string>(
 );
 
 const Card: React.FC<Partial<IPokemon>> = ({ name, stats, sprites, types }) => {
-  const bgColor: string = RGB_COLORS.get(types?.[Math.floor(Math.random() * types.length)].type.name) ?? '#f6f7f9';
+  const bgColor: string = React.useMemo(
+    () => RGB_COLORS.get(types?.[Math.floor(Math.random() * types.length)].type.name) ?? '#f6f7f9',
+    [types],
+  );
+
+  if (!name && !stats) {
+    return (
+      <div className={styles.root}>
+        <div className={styles.infoWrap}>
+          <div className={cn(styles.skeleton_title, styles.skeleton_box)} />
+          <div className={styles.statWrap}>
+            {['attack', 'defense'].map((stat) => (
+              <div key={stat} className={styles.statItem}>
+                <div className={cn(styles.skeleton_value, styles.skeleton_box)} />
+                {stat}
+              </div>
+            ))}
+          </div>
+          <div className={styles.labelWrap}>
+            <span className={cn(styles.skeleton_label, styles.skeleton_box)} />
+            <span className={cn(styles.skeleton_label, styles.skeleton_box)} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.root}>

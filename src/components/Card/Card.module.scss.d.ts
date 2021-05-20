@@ -9,6 +9,11 @@ interface CssExports {
   labelWrap: string;
   pictureWrap: string;
   root: string;
+  shimmer: string;
+  skeleton_box: string;
+  skeleton_label: string;
+  skeleton_title: string;
+  skeleton_value: string;
   statItem: string;
   statValue: string;
   statWrap: string;

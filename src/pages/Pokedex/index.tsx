@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 
 import { useQuery } from 'react-query';
@@ -6,39 +7,40 @@ import { IPokemon } from '../../@types/pokemon';
 import { getPokemons } from '../../api';
 
 import { Card, Header, Highlight, Layout, Typography } from '../../components';
-import { useDebounce } from '../../hooks';
+import { range } from '../../lib';
 
 import styles from './Pokedex.module.scss';
 
+const limit = 50;
+
 const Pokedex = () => {
   const [query, setQuery] = React.useState('');
-  const lastQuery = useDebounce(query, 500);
-
-  const { isLoading, isError, data } = useQuery<IPokemon[], Error>(
-    'pokemons',
-    () => getPokemons({ query: lastQuery }),
-    {
-      keepPreviousData: true,
-    },
-  );
+  const { data, isLoading } = useQuery<IPokemon[], Error>('pokemons', () => getPokemons({ limit }));
 
   return (
     <div className={styles.root}>
       <Header />
       <Layout className={styles.layerWrap}>
         <Typography className={styles.description}>
-          800{' '}
-          <b>
-            <Highlight>Pokemons</Highlight>
-          </b>{' '}
+          800
+          <Highlight>
+            <b>Pokemons</b>
+          </Highlight>
           for you to choose your favorite
         </Typography>
-        <input
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
-          placeholder="Encuentra tu pokémon..."
-          className={styles.search}
-          type="text"
-        />
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            console.log(query);
+          }}>
+          <input
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
+            value={query}
+            placeholder="Encuentra tu pokémon..."
+            className={styles.search}
+            type="text"
+          />
+        </form>
         <div className={styles.filters}>
           <select id="whatever">
             <option value="fire">Fire</option>
@@ -47,15 +49,11 @@ const Pokedex = () => {
             <option value="water">Water</option>
           </select>
         </div>
-        {isLoading || isError ? (
-          <>Loading ...</>
-        ) : (
-          <div className={styles.contentWrap}>
-            {data?.map(({ id, ...rest }) => (
-              <Card key={id} {...{ ...rest }} />
-            ))}
-          </div>
-        )}
+        <div className={styles.contentWrap}>
+          {isLoading
+            ? range(0, limit).map((id) => <Card key={id} />)
+            : data?.map(({ id, ...rest }) => <Card key={id} {...{ ...rest }} />)}
+        </div>
       </Layout>
     </div>
   );
