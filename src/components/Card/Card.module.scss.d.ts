@@ -2,12 +2,47 @@
 // Please do not change this file!
 interface CssExports {
   attack: string;
+  bug: string;
+  dark: string;
+  default: string;
   defense: string;
+  dragon: string;
+  electric: string;
+  fairy: string;
+  fighting: string;
+  fire: string;
+  flying: string;
+  ghost: string;
+  gradient_bug: string;
+  gradient_dark: string;
+  gradient_dragon: string;
+  gradient_electric: string;
+  gradient_fairy: string;
+  gradient_fighting: string;
+  gradient_fire: string;
+  gradient_flying: string;
+  gradient_ghost: string;
+  gradient_grass: string;
+  gradient_ground: string;
+  gradient_ice: string;
+  gradient_normal: string;
+  gradient_poison: string;
+  gradient_psychic: string;
+  gradient_rock: string;
+  gradient_steel: string;
+  gradient_water: string;
+  grass: string;
+  ground: string;
   hp: string;
+  ice: string;
   infoWrap: string;
   label: string;
   labelWrap: string;
+  normal: string;
   pictureWrap: string;
+  poison: string;
+  psychic: string;
+  rock: string;
   root: string;
   shimmer: string;
   skeleton_box: string;
@@ -17,7 +52,9 @@ interface CssExports {
   statItem: string;
   statValue: string;
   statWrap: string;
+  steel: string;
   titleName: string;
+  water: string;
 }
 export const cssExports: CssExports;
 export default cssExports;
