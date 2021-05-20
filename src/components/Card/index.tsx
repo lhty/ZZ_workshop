@@ -41,7 +41,7 @@ const Card: React.FC<Partial<IPokemon>> = ({ name, stats, sprites, types }) => {
             ({ base_stat, stat }) =>
               Object.keys(styles).includes(stat.name) && (
                 <div key={stat.name} className={styles.statItem}>
-                  <div className={cn(styles.statValue, styles[stat.name as keyof typeof styles])}>{base_stat}</div>
+                  <div className={cn(styles.statValue, styles[stat.name])}>{base_stat}</div>
                   {stat.name}
                 </div>
               ),
@@ -50,14 +50,14 @@ const Card: React.FC<Partial<IPokemon>> = ({ name, stats, sprites, types }) => {
         {types?.length && (
           <div className={styles.labelWrap}>
             {types?.map(({ slot, type }) => (
-              <span key={slot} className={cn(styles.label, styles[type.name as keyof typeof styles])}>
+              <span key={slot} className={cn(styles.label, styles[type.name])}>
                 {type?.name}
               </span>
             ))}
           </div>
         )}
       </div>
-      <div className={cn(styles.pictureWrap, styles[`gradient_${types?.[0].type.name}` as keyof typeof styles])}>
+      <div className={cn(styles.pictureWrap, styles[`gradient_${types?.[0].type.name}`])}>
         <img src={sprites?.other?.['official-artwork'].front_default} alt={`${name} official-artwork`} />
       </div>
     </div>

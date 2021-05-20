@@ -51,7 +51,7 @@ const Highlight: React.FC<{ color?: string }> = ({ children, color = '#FFC700', 
 interface SparkleProps {
   size: number;
   color: string;
-  style: { [key: string]: string };
+  style: Record<string, string>;
 }
 const Sparkle: React.FC<SparkleProps> = ({ size, color, style }) => {
   const path =

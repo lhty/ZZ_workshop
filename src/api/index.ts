@@ -1,6 +1,6 @@
 import { IPokemon } from '../@types/pokemon';
+import { req } from '../lib';
 
-const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
 export interface IPokemonResults {
   count?: number;
   next?: string;
@@ -11,9 +11,9 @@ export interface IPokemonResults {
 type getPokemonsFnType = (params: { limit?: number; offset?: number }) => Promise<IPokemonResults>;
 
 const getPokemons: getPokemonsFnType = async ({ limit = 50, offset = 0 }) => {
-  const data = await fetch(`${BASE_URL}?limit=${limit}&offset=${offset}`);
+  // const data = await fetch(`${URL}?limit=${limit}&offset=${offset}`);
 
-  const { results, ...paginate_info } = await data.json();
+  const { results, ...paginate_info } = await req('getPokemons', { limit, offset });
 
   const detailedResultsData = await Promise.all(
     results.map(async ({ url }: { url: string }) => {
