@@ -2,9 +2,6 @@
 @import '../../styles/breakpoints';
 
 .root {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
   min-height: 100vh;
   background: linear-gradient(180deg, $third 0%, $primary 100%);
   overflow: hidden;

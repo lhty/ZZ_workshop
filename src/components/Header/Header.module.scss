@@ -2,8 +2,9 @@
 @import '../../styles/breakpoints';
 
 .root {
+  display: inline-flex;
   height: 93px;
-  display: flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
   background-color: $third;

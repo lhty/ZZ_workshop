@@ -1,14 +1,13 @@
 import { navigate } from 'hookrouter';
 import React from 'react';
 
-import { Button, Footer, Header, Typography, Layout, Parallax } from '../../components';
+import { Button, Footer, Typography, Layout, Parallax } from '../../components';
 import { LinkEnum } from '../../routes';
 import styles from './Home.module.scss';
 
 const Home = () => {
   return (
     <div className={styles.root}>
-      <Header />
       <Layout className={styles.contentWrap}>
         <div className={styles.contentText}>
           <Typography>

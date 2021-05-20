@@ -9,8 +9,6 @@ import { ReactComponent as Logo } from './assets/Logo.svg';
 import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
-  const path = usePath();
-
   return (
     <header className={styles.root}>
       <div className={styles.wrap}>
@@ -18,15 +16,26 @@ const Header: React.FC = () => {
           <Logo />
         </div>
         <div className={styles.menuWrap}>
-          {MAIN_MENU.map(({ title, link }) => (
-            <A key={title + link} href={link} className={cn(styles.menuLink, { [styles.activeLink]: link === path })}>
-              {title}
-            </A>
-          ))}
+          <NavMenu />
         </div>
       </div>
     </header>
   );
 };
 
-export default Header;
+// eslint-disable-next-line spaced-comment
+/* React 16 array return type no solution in TS without <></> hack so far(*/
+const NavMenu: React.FC = () => {
+  const path = usePath();
+  return (
+    <>
+      {MAIN_MENU.map(({ title, link }) => (
+        <A key={title + link} href={link} className={cn(styles.menuLink, { [styles.activeLink]: link === path })}>
+          {title}
+        </A>
+      ))}
+    </>
+  );
+};
+
+export default React.memo(Header);

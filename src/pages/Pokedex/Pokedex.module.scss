@@ -1,4 +1,5 @@
 @import '../../styles/breakpoints';
+@import '../../styles/variables';
 
 .root {
   min-height: 100vh;
@@ -35,9 +36,9 @@
   width: 100%;
   height: 50px;
   background: #f2f2f2;
-  box-shadow: 5px 9px 13px -10px #2121214a;
   border: none;
-  border-radius: 40px;
+  box-shadow: $base_shadow;
+  border-radius: $base_radius;
   padding: 5px 25px;
   outline: none;
   font-size: 1.5rem;
@@ -60,8 +61,8 @@
   justify-content: center;
 
   & select {
-    box-shadow: 4px 6px 15px -7px #2121214a;
-    border-radius: 4px;
+    box-shadow: $base_shadow;
+    border-radius: $base_radius;
     width: 135px;
     text-align-last: center;
     border: none;
