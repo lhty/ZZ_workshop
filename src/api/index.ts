@@ -8,11 +8,9 @@ export interface IPokemonResults {
   results: Array<IPokemon>;
 }
 
-type getPokemonsFnType = (params: { limit?: number; offset?: number }) => Promise<IPokemonResults>;
+type getPokemonsFnType = (params: { limit?: number; offset?: number; query?: string }) => Promise<IPokemonResults>;
 
 const getPokemons: getPokemonsFnType = async ({ limit = 50, offset = 0 }) => {
-  // const data = await fetch(`${URL}?limit=${limit}&offset=${offset}`);
-
   const { results, ...paginate_info } = await req('getPokemons', { limit, offset });
 
   const detailedResultsData = await Promise.all(

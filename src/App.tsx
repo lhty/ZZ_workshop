@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { ReactQueryDevtools } from 'react-query-devtools';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { useRoutes } from 'hookrouter';
@@ -19,6 +20,7 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <Header />
         {matchUrl}
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     ) || <NotFoundPage />
   );

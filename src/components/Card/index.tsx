@@ -14,7 +14,7 @@ const Card: React.FC<Partial<IPokemon>> = ({ name, stats, sprites, types }) => {
         <div className={styles.infoWrap}>
           <div className={cn(styles.skeleton_title, styles.skeleton_box)} />
           <div className={styles.statWrap}>
-            {['attack', 'defense'].map((stat) => (
+            {['hp', 'attack', 'defense'].map((stat) => (
               <div key={stat} className={styles.statItem}>
                 <div className={cn(styles.skeleton_value, styles.skeleton_box)} />
                 {stat}
@@ -22,6 +22,7 @@ const Card: React.FC<Partial<IPokemon>> = ({ name, stats, sprites, types }) => {
             ))}
           </div>
           <div className={styles.labelWrap}>
+            <span className={cn(styles.skeleton_label, styles.skeleton_box)} />
             <span className={cn(styles.skeleton_label, styles.skeleton_box)} />
             <span className={cn(styles.skeleton_label, styles.skeleton_box)} />
           </div>
