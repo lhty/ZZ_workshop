@@ -8,9 +8,7 @@ export interface IPokemonResults {
   results: Array<IPokemon>;
 }
 
-type getPokemonsFnType = (params: { limit?: number; offset?: number; query?: string }) => Promise<IPokemonResults>;
-
-const getPokemons: getPokemonsFnType = async ({ limit = 50, offset = 0 }) => {
+const getPokemons = async ({ limit = 50, offset = 0 }: Record<string, number>): Promise<IPokemonResults> => {
   const { results, ...paginate_info } = await req('getPokemons', { limit, offset });
 
   const detailedResultsData = await Promise.all(

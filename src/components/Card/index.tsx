@@ -24,7 +24,6 @@ const Card: React.FC<Partial<IPokemon>> = ({ name, stats, sprites, types }) => {
           <div className={styles.labelWrap}>
             <span className={cn(styles.skeleton_label, styles.skeleton_box)} />
             <span className={cn(styles.skeleton_label, styles.skeleton_box)} />
-            <span className={cn(styles.skeleton_label, styles.skeleton_box)} />
           </div>
         </div>
       </div>
