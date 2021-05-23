@@ -1,5 +1,14 @@
 @import '../../styles/variables';
 
+@each $key, $value in $bgColors {
+  .#{$key} {
+    background-color: $value;
+  }
+  .gradient_#{$key} {
+    background: linear-gradient(270deg, $value 0.15%, #f6f7f9 100%);
+  }
+}
+
 .root {
   position: relative;
   display: flex;
@@ -15,6 +24,10 @@
     transform: scale(1.03);
     transition: all ease-in-out 0s;
   }
+}
+
+.default {
+  background-color: #f6f7f9;
 }
 
 .infoWrap {
@@ -43,7 +56,7 @@
   line-height: 14px;
   text-align: center;
   color: #4b4b4b;
-  margin-right: 12px;
+  width: 50px;
   text-transform: capitalize;
 
   &:last-child {
@@ -125,7 +138,7 @@
 }
 
 .skeleton_title {
-  width: 150px;
+  width: 120px;
   height: 28px;
   margin-bottom: 12px;
   border-radius: $base_radius;
@@ -162,7 +175,7 @@
     left: 0;
     transform: translateX(-100%);
     background-image: linear-gradient(90deg, rgba(#fff, 0) 0, rgba(#fff, 0.2) 20%, rgba(#fff, 0.5) 60%, rgba(#fff, 0));
-    animation: shimmer 1s infinite;
+    animation: shimmer 2s infinite;
     content: '';
   }
 

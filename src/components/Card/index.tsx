@@ -7,42 +7,14 @@ import { Typography } from '..';
 
 import styles from './Card.module.scss';
 
-const RGB_COLORS = new Map<string | undefined, string>(
-  Object.entries({
-    normal: '#A8A77A',
-    fire: '#EE8130',
-    water: '#6390F0',
-    electric: '#F7D02C',
-    grass: '#7AC74C',
-    ice: '#96D9D6',
-    fighting: '#C22E28',
-    poison: '#A33EA1',
-    ground: '#E2BF65',
-    flying: '#A98FF3',
-    psychic: '#F95587',
-    bug: '#A6B91A',
-    rock: '#B6A136',
-    ghost: '#735797',
-    dragon: '#6F35FC',
-    dark: '#705746',
-    steel: '#B7B7CE',
-    fairy: '#D685AD',
-  }),
-);
-
 const Card: React.FC<Partial<IPokemon>> = ({ name, stats, sprites, types }) => {
-  const bgColor: string = React.useMemo(
-    () => RGB_COLORS.get(types?.[Math.floor(Math.random() * types.length)].type.name) ?? '#f6f7f9',
-    [types],
-  );
-
   if (!name && !stats) {
     return (
       <div className={styles.root}>
         <div className={styles.infoWrap}>
           <div className={cn(styles.skeleton_title, styles.skeleton_box)} />
           <div className={styles.statWrap}>
-            {['attack', 'defense'].map((stat) => (
+            {['hp', 'attack', 'defense'].map((stat) => (
               <div key={stat} className={styles.statItem}>
                 <div className={cn(styles.skeleton_value, styles.skeleton_box)} />
                 {stat}
@@ -69,7 +41,7 @@ const Card: React.FC<Partial<IPokemon>> = ({ name, stats, sprites, types }) => {
             ({ base_stat, stat }) =>
               Object.keys(styles).includes(stat.name) && (
                 <div key={stat.name} className={styles.statItem}>
-                  <div className={cn(styles.statValue, styles[stat.name as keyof typeof styles])}>{base_stat}</div>
+                  <div className={cn(styles.statValue, styles[stat.name])}>{base_stat}</div>
                   {stat.name}
                 </div>
               ),
@@ -78,16 +50,14 @@ const Card: React.FC<Partial<IPokemon>> = ({ name, stats, sprites, types }) => {
         {types?.length && (
           <div className={styles.labelWrap}>
             {types?.map(({ slot, type }) => (
-              <span key={slot} className={styles.label} style={{ backgroundColor: `${RGB_COLORS.get(type.name)}` }}>
+              <span key={slot} className={cn(styles.label, styles[type.name])}>
                 {type?.name}
               </span>
             ))}
           </div>
         )}
       </div>
-      <div
-        className={styles.pictureWrap}
-        style={{ background: `linear-gradient(270deg, ${bgColor} 0.15%,  #f6f7f9 100%)` }}>
+      <div className={cn(styles.pictureWrap, styles[`gradient_${types?.[0].type.name}`])}>
         <img src={sprites?.other?.['official-artwork'].front_default} alt={`${name} official-artwork`} />
       </div>
     </div>
