@@ -1,20 +1,22 @@
-/* eslint-disable no-console */
 import React from 'react';
 
 import { useQuery } from 'react-query';
 
-import { getPokemons, IPokemonResults } from '../../api';
+import { getPokemons } from '../../api/getters';
+import { IPokemon } from '../../@types/pokemon';
 
 import { Card, Highlight, Layout, Typography } from '../../components';
 import { range } from '../../lib';
 
 import styles from './Pokedex.module.scss';
 
-const limit = 50;
+const [limit, offset] = [50, 0];
 
 const Pokedex = () => {
   const [query, setQuery] = React.useState('');
-  const { data, isLoading, isError } = useQuery<IPokemonResults, Error>(['pokemons'], () => getPokemons({ limit }));
+  const { data, isLoading, isError, refetch } = useQuery(['pokemons'], () => getPokemons({ limit, offset }), {
+    keepPreviousData: true,
+  });
 
   return (
     <div className={styles.root}>
@@ -29,7 +31,7 @@ const Pokedex = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            console.log(query);
+            refetch();
           }}>
           <input
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
@@ -48,7 +50,7 @@ const Pokedex = () => {
           </select>
         </div>
         <div className={styles.contentWrap}>
-          <ContentGrid {...{ isLoading, isError, data }} />
+          <ContentGrid {...{ isLoading, isError, data: data?.results }} />
         </div>
       </Layout>
     </div>
@@ -58,7 +60,7 @@ const Pokedex = () => {
 interface IContentGrid {
   isLoading: boolean;
   isError: boolean;
-  data?: IPokemonResults;
+  data?: Array<IPokemon>;
 }
 
 const ContentGrid: React.FC<IContentGrid> = ({ isLoading, isError, data }) => {
@@ -70,7 +72,7 @@ const ContentGrid: React.FC<IContentGrid> = ({ isLoading, isError, data }) => {
     <>
       {isLoading
         ? range(0, limit).map((id) => <Card key={id} />)
-        : data?.results?.map(({ id, ...rest }) => <Card key={id} {...{ ...rest }} />)}
+        : data?.map(({ id, ...rest }) => <Card key={id} {...{ ...rest }} />)}
     </>
   );
 };
