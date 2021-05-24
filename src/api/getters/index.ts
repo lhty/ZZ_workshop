@@ -17,7 +17,12 @@ export const getPokemons = async ({ limit = 50, offset = 0 }) => {
   return { results: await resolveField<IPokemon[]>('url', results), ...paginate_info };
 };
 
-export const searchPokemon = async ({ name }: Record<string, string>): Promise<IPokemon> => {
-  const result = await request<IPokemon, string>('getPokemons', { name });
-  return result;
+export const searchPokemon = async ({ count = 1118, search = '' }) => {
+  const { results: all } = await request<IgetPokemonPage, number>('getPokemons', {
+    limit: count,
+    offset: 0,
+  });
+  const regex = new RegExp(search);
+  const found = all.filter(({ name }) => regex.test(name));
+  return { results: await resolveField<IPokemon[]>('url', found) };
 };
