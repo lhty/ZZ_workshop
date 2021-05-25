@@ -21,6 +21,12 @@ const config: IConfig = {
           pathname: '/api/v2/pokemon',
         },
       },
+      getPokemonById: {
+        method: 'GET',
+        uri: {
+          pathname: '/api/v2/pokemon/',
+        },
+      },
     },
   },
 };

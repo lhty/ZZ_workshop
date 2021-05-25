@@ -1,9 +1,11 @@
 import React from 'react';
-import { HomePage, LegendsPage, Pokedex } from './pages';
+import { Modal } from './components';
+import { HomePage, LegendsPage, Pokedex, PokemonPage, IPokemonPageProps } from './pages';
 
 export enum LinkEnum {
   HOME = '/',
   POKEDEX = '/pokedex',
+  POKEMON = '/pokedex/:id',
   LEGENDARIES = '/legendaries',
   DOCUMENTATION = '/documentation',
 }
@@ -11,7 +13,7 @@ export enum LinkEnum {
 interface IMenuItem {
   title: string;
   link: LinkEnum;
-  component: React.FC;
+  component: React.FC<React.PropsWithChildren<any>>;
 }
 
 export const MAIN_MENU: IMenuItem[] = [
@@ -21,7 +23,19 @@ export const MAIN_MENU: IMenuItem[] = [
   { title: 'Documentation', link: LinkEnum.DOCUMENTATION, component: () => <HomePage /> },
 ];
 
-const ROUTES = MAIN_MENU.reduce((acc, { link, component }) => {
+export const NESTED_ROUTES: IMenuItem[] = [
+  {
+    title: 'Pokemon',
+    link: LinkEnum.POKEMON,
+    component: ({ id }: IPokemonPageProps) => (
+      <Modal id="pokemon">
+        <PokemonPage id={id} />
+      </Modal>
+    ),
+  },
+];
+
+const ROUTES = [...MAIN_MENU, ...NESTED_ROUTES].reduce((acc, { link, component }) => {
   acc[link] = component;
   return acc;
 }, {} as Record<string, React.FC>);

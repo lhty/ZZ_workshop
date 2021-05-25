@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import React from 'react';
 
 import { useQuery } from 'react-query';
 
-import { getPokemons, searchPokemon } from '../../api/getters';
+import { getAllPokemons, getPokemonData } from '../../api/getters';
 import { IPokemon } from '../../@types/pokemon';
 
 import { Card, Highlight, Layout, Typography } from '../../components';
@@ -12,18 +13,36 @@ import { range } from '../../lib';
 import styles from './Pokedex.module.scss';
 import { useDebounce } from '../../hooks';
 
-const [limit, offset] = [50, 0];
+interface IPokedexState {
+  search: string;
+  limit: number;
+  offset: number;
+  selected?: number;
+}
 
 const Pokedex = () => {
-  const [_search, setSearch] = React.useState('');
-  const search = useDebounce(_search, 500);
-  const { data, isLoading, isError, refetch } = useQuery(['pokemons'], () => getPokemons({ limit, offset }), {
-    keepPreviousData: true,
+  const [{ search, limit, offset, selected }, dispatch] = React.useReducer<
+    React.Reducer<IPokedexState, Partial<IPokedexState>>
+  >((prev, update) => ({ ...prev, ...update }), {
+    search: '',
+    limit: 50,
+    offset: 0,
+    selected: undefined,
   });
-  const { data: found } = useQuery(['pokemons', search], () => searchPokemon({ count: data?.count, search }), {
-    enabled: !!data?.count && !!search,
-    keepPreviousData: true,
-  });
+  const [debouncedSearch, setImmediate] = useDebounce<string>(search, 500);
+  const { data: raw, isFetched } = useQuery(['pokemons'], getAllPokemons);
+  const { data, isLoading, isError, refetch } = useQuery(
+    ['pokemonsData'],
+    () => getPokemonData({ data: raw?.results, limit, offset, search: debouncedSearch }),
+    {
+      enabled: isFetched,
+      keepPreviousData: true,
+    },
+  );
+
+  React.useEffect(() => {
+    refetch();
+  }, [debouncedSearch, refetch]);
 
   return (
     <div className={styles.root}>
@@ -35,52 +54,71 @@ const Pokedex = () => {
           </Highlight>
           for you to choose your favorite
         </Typography>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            refetch();
-          }}>
-          <input
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
-            value={_search}
-            placeholder="Find your pokémon..."
-            className={styles.search}
-            type="text"
-          />
-        </form>
-        <div className={styles.filters}>
-          <select id="whatever">
-            <option value="fire">Fire</option>
-            <option value="normal">Normal</option>
-            <option value="electric">Electric</option>
-            <option value="water">Water</option>
-          </select>
-        </div>
-        <div className={styles.contentWrap}>
-          <ContentGrid {...{ isLoading, isError, data: found?.results.length ? found.results : data?.results }} />
-        </div>
+        <Search {...{ search, dispatch, setImmediate }} />
+        <CheckBox />
+        <ContentGrid {...{ isLoading, isError, limit, offset, data }} />
       </Layout>
     </div>
   );
 };
 
-interface IContentGrid {
+const Search: React.FC<{
+  search: string;
+  dispatch: React.Dispatch<Partial<IPokedexState>>;
+  setImmediate: (s: string) => void;
+}> = ({ search, dispatch, setImmediate }) => {
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        setImmediate(search);
+      }}>
+      <input
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch({ search: e.target.value })}
+        value={search}
+        spellCheck="false"
+        placeholder="Find your pokémon..."
+        className={styles.search}
+        type="text"
+      />
+    </form>
+  );
+};
+
+const CheckBox: React.FC = () => {
+  return (
+    <div className={styles.filters}>
+      <select id="whatever">
+        <option value="fire">Fire</option>
+        <option value="normal">Normal</option>
+        <option value="electric">Electric</option>
+        <option value="water">Water</option>
+      </select>
+    </div>
+  );
+};
+
+const ContentGrid: React.FC<{
   isLoading: boolean;
   isError: boolean;
+  limit: number;
+  offset: number;
   data?: Array<IPokemon>;
-}
-
-const ContentGrid: React.FC<IContentGrid> = ({ isLoading, isError, data }) => {
+}> = ({ isLoading, isError, data, limit, offset }) => {
   if (isError) {
-    return <>Something gone wrong</>;
+    return <Typography className={styles.description}>Something went wrong</Typography>;
+  }
+
+  if (!isLoading && !data?.length) {
+    return <Typography className={styles.description}>Nothing found :(</Typography>;
   }
 
   return (
-    <>
+    <div className={styles.contentWrap}>
       {isLoading
         ? range(0, limit).map((id) => <Card key={id} />)
-        : data?.map(({ id, ...rest }) => <Card key={id} {...{ ...rest }} />)}
-    </>
+        : data?.map(({ id, ...rest }, idx) => idx >= offset && idx <= limit && <Card key={id} {...{ id, ...rest }} />)}
+    </div>
   );
 };
 
