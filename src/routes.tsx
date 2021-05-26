@@ -1,3 +1,4 @@
+import { navigate } from 'hookrouter';
 import React from 'react';
 import { Modal } from './components';
 import { HomePage, LegendsPage, Pokedex, PokemonPage, IPokemonPageProps } from './pages';
@@ -28,7 +29,7 @@ export const NESTED_ROUTES: IMenuItem[] = [
     title: 'Pokemon',
     link: LinkEnum.POKEMON,
     component: ({ id }: IPokemonPageProps) => (
-      <Modal id="pokemon">
+      <Modal id="pokemon" onClose={() => navigate(LinkEnum.POKEDEX)}>
         <PokemonPage id={id} />
       </Modal>
     ),

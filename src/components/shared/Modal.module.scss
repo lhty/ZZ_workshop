@@ -1,0 +1,18 @@
+.root {
+  position: fixed;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00000057;
+  width: 100vw;
+  height: 100vh;
+}
+.wrapper {
+  position: relative;
+}
+.close {
+  position: absolute;
+  top: -25px;
+  right: -40px;
+}

@@ -1,42 +1,17 @@
 import React from 'react';
 
-const createRootElement = (id: string) => {
-  const rootContainer = document.createElement('div');
-  rootContainer.setAttribute('id', id);
-  return rootContainer;
-};
-
-const addRootElement = (rootElem: Element) => {
-  document.body.insertBefore(rootElem, document.body.lastElementChild.nextElementSibling);
-};
-
-export const usePortal = (id: string) => {
-  const rootElemRef = React.useRef(document.createElement('div'));
+export const usePortal = (id: string, classname: string) => {
+  const parentElemRef = React.useRef(document.body);
+  const portalElemRef = React.useRef(document.getElementById(id) || document.createElement('div'));
+  portalElemRef.current.className = classname;
 
   React.useEffect(() => {
-    const existingParent = document.querySelector(`#${id}`);
-    const parentElem = existingParent || createRootElement(id);
-    const rootElem = rootElemRef.current;
-
-    if (!existingParent) {
-      addRootElement(parentElem);
-    }
-
-    parentElem?.appendChild(rootElemRef.current);
+    const portal = portalElemRef.current;
+    parentElemRef.current.insertBefore(portal, parentElemRef.current.firstChild);
     return () => {
-      rootElem.remove();
-      if (!parentElem.childElementCount) {
-        parentElem.remove();
-      }
+      portal.remove();
     };
   }, [id]);
 
-  const getRootElem = () => {
-    if (!rootElemRef.current) {
-      rootElemRef.current = document.createElement('div');
-    }
-    return rootElemRef.current;
-  };
-
-  return getRootElem();
+  return [portalElemRef.current];
 };
