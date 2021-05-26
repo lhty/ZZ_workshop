@@ -17,21 +17,21 @@ interface IPokedexState {
   search: string;
   limit: number;
   offset: number;
-  selected?: number;
+  selectedId?: number;
 }
 
 const Pokedex = () => {
-  const [{ search, limit, offset, selected }, dispatch] = React.useReducer<
+  const [{ search, limit, offset, selectedId }, dispatch] = React.useReducer<
     React.Reducer<IPokedexState, Partial<IPokedexState>>
   >((prev, update) => ({ ...prev, ...update }), {
     search: '',
     limit: 50,
     offset: 0,
-    selected: undefined,
+    selectedId: undefined,
   });
   const [debouncedSearch, setImmediate] = useDebounce<string>(search, 500);
   const { data: raw, isFetched } = useQuery(['pokemons'], getAllPokemons);
-  const { data, isLoading, isError, refetch } = useQuery(
+  const { data, isFetching, isError, refetch } = useQuery(
     ['pokemonsData'],
     () => getPokemonData({ data: raw?.results, limit, offset, search: debouncedSearch }),
     {
@@ -56,7 +56,7 @@ const Pokedex = () => {
         </Typography>
         <Search {...{ search, dispatch, setImmediate }} />
         <CheckBox />
-        <ContentGrid {...{ isLoading, isError, limit, offset, data }} />
+        <ContentGrid {...{ isError, isFetching, limit, offset, data }} />
       </Layout>
     </div>
   );
@@ -99,23 +99,23 @@ const CheckBox: React.FC = () => {
 };
 
 const ContentGrid: React.FC<{
-  isLoading: boolean;
   isError: boolean;
+  isFetching: boolean;
   limit: number;
   offset: number;
-  data?: Array<IPokemon>;
-}> = ({ isLoading, isError, data, limit, offset }) => {
+  data?: Array<IPokemon> | null;
+}> = ({ isFetching, isError, data, limit, offset }) => {
   if (isError) {
     return <Typography className={styles.description}>Something went wrong</Typography>;
   }
 
-  if (!isLoading && !data?.length) {
+  if (!data) {
     return <Typography className={styles.description}>Nothing found :(</Typography>;
   }
 
   return (
     <div className={styles.contentWrap}>
-      {isLoading
+      {isFetching
         ? range(0, limit).map((id) => <Card key={id} />)
         : data?.map(({ id, ...rest }, idx) => idx >= offset && idx <= limit && <Card key={id} {...{ id, ...rest }} />)}
     </div>

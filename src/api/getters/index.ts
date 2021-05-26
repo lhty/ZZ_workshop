@@ -29,6 +29,9 @@ export const getPokemonData = async ({ data = [], limit = 50, offset = 0, search
   const rawData = search
     ? data?.filter(({ name }) => new RegExp(search).test(name)).slice(offset, limit)
     : data?.slice(offset, limit);
+
+  if (search && !rawData.length) return null;
+
   const result = await resolveField<IPokemon[]>('url', rawData);
   return result;
 };

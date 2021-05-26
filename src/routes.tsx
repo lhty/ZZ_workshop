@@ -9,13 +9,13 @@ export enum LinkEnum {
   DOCUMENTATION = '/documentation',
 }
 
-interface IMenuItem {
+interface RouteElement {
   title: string;
   link: LinkEnum;
   component: React.FC<React.PropsWithChildren<any>>;
 }
 
-export const MAIN_MENU: IMenuItem[] = [
+export const MAIN_MENU: Array<RouteElement> = [
   { title: 'Home', link: LinkEnum.HOME, component: () => <HomePage /> },
   { title: 'Pokédex', link: LinkEnum.POKEDEX, component: () => <PokedexPage /> },
   { title: 'Legendaries', link: LinkEnum.LEGENDARIES, component: () => <LegendsPage /> },

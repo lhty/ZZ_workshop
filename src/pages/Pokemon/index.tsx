@@ -1,7 +1,9 @@
 import React from 'react';
+import { navigate } from 'hookrouter';
 import { useQuery } from 'react-query';
 import { getPokemonById } from '../../api/getters';
-import { Typography } from '../../components';
+import { Modal, Typography } from '../../components';
+import { LinkEnum } from '../../routes';
 
 import styles from './Pokemon.module.scss';
 
@@ -23,19 +25,21 @@ const PokemonPage: React.FC<IPokemonPageProps> = ({ id }) => {
   }
 
   return (
-    <div className={styles.root}>
-      <div className={styles.pictureWrap}>
-        <img
-          src={data?.sprites?.other?.['official-artwork'].front_default || data?.sprites?.front_default}
-          alt={`${data?.name} official-artwork`}
-        />
+    <Modal id="pokemon" onClose={() => navigate(LinkEnum.POKEDEX)}>
+      <div className={styles.root}>
+        <div className={styles.pictureWrap}>
+          <img
+            src={data?.sprites?.other?.['official-artwork'].front_default || data?.sprites?.front_default}
+            alt={`${data?.name} official-artwork`}
+          />
+        </div>
+        <div className={styles.stats_wrapper}>
+          <Typography size="l" className={styles.titleName}>
+            {data?.name}
+          </Typography>
+        </div>
       </div>
-      <div className={styles.stats_wrapper}>
-        <Typography size="l" className={styles.titleName}>
-          {data?.name}
-        </Typography>
-      </div>
-    </div>
+    </Modal>
   );
 };
 
