@@ -6,7 +6,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { useRoutes } from 'hookrouter';
 import ROUTES from './routes';
 
-import { getAllPokemons } from './api/getters';
+import { cache_names } from './config';
+import { getAllPokemonNames } from './lib';
 
 import { NotFoundPage } from './pages';
 import { Header } from './components';
@@ -19,7 +20,7 @@ const App = () => {
 
   React.useLayoutEffect(() => {
     const prefetchAllPokemons = async () => {
-      await queryClient.prefetchQuery(['pokemons'], getAllPokemons);
+      await queryClient.prefetchQuery(cache_names.pokemon_names, getAllPokemonNames);
     };
     prefetchAllPokemons();
   }, [queryClient]);

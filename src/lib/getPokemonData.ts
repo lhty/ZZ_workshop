@@ -1,4 +1,4 @@
-export const resolveField = async <T>(key: string, input: T): Promise<T> => {
+export const getPokemonData = async <T>(key: string, input: T): Promise<T> => {
   const resolve = async (el: T) => {
     const response = await fetch(el[key]);
     const responseData = await response.json();

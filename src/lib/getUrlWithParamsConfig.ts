@@ -1,5 +1,5 @@
 import { format } from 'url';
-import config from '../../config';
+import config from '../config';
 
 export const getUrlWithParamsConfig = (action: string, query?: Record<string, number | string>): string => {
   const param = query?.id || query?.name;

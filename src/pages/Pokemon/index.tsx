@@ -1,9 +1,7 @@
 import React from 'react';
-import { navigate } from 'hookrouter';
-import { useQuery } from 'react-query';
-import { getPokemonById } from '../../api/getters';
+import { IPokemon } from '../../@types/pokemon';
+
 import { Modal, Typography } from '../../components';
-import { LinkEnum } from '../../routes';
 
 import styles from './Pokemon.module.scss';
 
@@ -13,9 +11,7 @@ export interface IPokemonPageProps {
 
 /* TBD */
 const PokemonPage: React.FC<IPokemonPageProps> = ({ id }) => {
-  const { data, isLoading, isError } = useQuery(['pokemonsData', { id }], () => getPokemonById({ id }), {
-    keepPreviousData: true,
-  });
+  const { data, isLoading, isError } = { data: {} as IPokemon, isLoading: false, isError: false };
   if (isLoading) {
     return <>Loading ...</>;
   }
@@ -25,7 +21,7 @@ const PokemonPage: React.FC<IPokemonPageProps> = ({ id }) => {
   }
 
   return (
-    <Modal id="pokemon" onClose={() => navigate(LinkEnum.POKEDEX)}>
+    <Modal id="pokemon" onClose={() => null}>
       <div className={styles.root}>
         <div className={styles.pictureWrap}>
           <img

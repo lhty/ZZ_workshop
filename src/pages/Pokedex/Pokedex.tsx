@@ -2,16 +2,13 @@
 /* eslint-disable no-console */
 import React from 'react';
 
-import { useQuery } from 'react-query';
-
-import { getAllPokemons, getPokemonData } from '../../api/getters';
-import { IPokemon } from '../../@types/pokemon';
-
 import { Card, Highlight, Layout, Typography } from '../../components';
 import { range } from '../../lib';
 
+import { IPokemon } from '../../@types/pokemon';
+import { useAllPokemonNames, useDebounce, usePokemonData } from '../../hooks';
+
 import styles from './Pokedex.module.scss';
-import { useDebounce } from '../../hooks';
 
 interface IPokedexState {
   search: string;
@@ -30,15 +27,13 @@ const Pokedex = () => {
     selectedId: undefined,
   });
   const [debouncedSearch, setImmediate] = useDebounce<string>(search, 500);
-  const { data: raw, isFetched } = useQuery(['pokemons'], getAllPokemons);
-  const { data, isFetching, isError, refetch } = useQuery(
-    ['pokemonsData'],
-    () => getPokemonData({ data: raw?.results, limit, offset, search: debouncedSearch }),
-    {
-      enabled: isFetched,
-      keepPreviousData: true,
-    },
-  );
+  const { data: pokemon_names } = useAllPokemonNames();
+  const {
+    data: pokemon_data,
+    isFetching,
+    isError,
+    refetch,
+  } = usePokemonData({ data: pokemon_names?.results, limit, offset, search: debouncedSearch });
 
   React.useEffect(() => {
     refetch();
@@ -56,7 +51,7 @@ const Pokedex = () => {
         </Typography>
         <Search {...{ search, dispatch, setImmediate }} />
         <CheckBox />
-        <ContentGrid {...{ isError, isFetching, limit, offset, data }} />
+        <ContentGrid {...{ isError, isFetching, limit, offset, pokemon_data }} />
       </Layout>
     </div>
   );
@@ -103,13 +98,13 @@ const ContentGrid: React.FC<{
   isFetching: boolean;
   limit: number;
   offset: number;
-  data?: Array<IPokemon> | null;
-}> = ({ isFetching, isError, data, limit, offset }) => {
+  pokemon_data?: Array<IPokemon> | null;
+}> = ({ isFetching, isError, pokemon_data, limit, offset }) => {
   if (isError) {
     return <Typography className={styles.description}>Something went wrong</Typography>;
   }
 
-  if (!data) {
+  if (!pokemon_data) {
     return <Typography className={styles.description}>Nothing found :(</Typography>;
   }
 
@@ -117,7 +112,9 @@ const ContentGrid: React.FC<{
     <div className={styles.contentWrap}>
       {isFetching
         ? range(0, limit).map((id) => <Card key={id} />)
-        : data?.map(({ id, ...rest }, idx) => idx >= offset && idx <= limit && <Card key={id} {...{ id, ...rest }} />)}
+        : pokemon_data?.map(
+            ({ id, ...rest }, idx) => idx >= offset && idx <= limit && <Card key={id} {...{ id, ...rest }} />,
+          )}
     </div>
   );
 };

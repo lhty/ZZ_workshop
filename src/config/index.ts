@@ -31,4 +31,9 @@ const config: IConfig = {
   },
 };
 
+export enum cache_names {
+  pokemon_names = 'pokemon_names',
+  pokemon_data = 'pokemon_data',
+}
+
 export default config;
