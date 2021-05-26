@@ -41,7 +41,7 @@ const Highlight: React.FC<{ color?: string }> = ({ children, color = '#FFC700', 
   return (
     <div className={styles.wrapper} {...props}>
       {sparkles.map(({ id, size, style, color }) => (
-        <Sparkle key={id} {...{ size, style, color }} />
+        <Sparkle key={id + size} {...{ size, style, color }} />
       ))}
       <div className={styles.childWrapper}>{children}</div>
     </div>

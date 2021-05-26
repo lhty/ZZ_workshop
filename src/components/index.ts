@@ -6,5 +6,6 @@ import Parallax from './Parallax';
 import Typography from './Typography';
 import Card from './Card';
 import Highlight from './Typography/Highlight';
+import Modal from './Modal';
 
-export { Header, Layout, Button, Parallax, Footer, Typography, Highlight, Card };
+export { Header, Layout, Button, Parallax, Footer, Typography, Highlight, Card, Modal };

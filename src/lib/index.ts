@@ -1,2 +1,5 @@
 export { range, random } from './utilty';
-export { req } from './request';
+export { getAllPokemonNames } from './getAllPokemonNames';
+export { getPokemonData } from './getPokemonData';
+export { getUrlWithParamsConfig } from './getUrlWithParamsConfig';
+export { request } from './request';

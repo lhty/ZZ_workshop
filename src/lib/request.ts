@@ -1,9 +1,7 @@
-import { format } from 'url';
-import { getUrlWithParamsConfig } from './getUrlWithParamsConfig';
+import { getUrlWithParamsConfig } from '.';
 
-export const req = async (action: string, query?: Record<string, number>) => {
-  const URI = format(getUrlWithParamsConfig(action, query));
-  const data = await fetch(URI);
+export const request = async <T>(action: string, query?: Record<string, number>): Promise<T> => {
+  const data = await fetch(getUrlWithParamsConfig(action, query));
   const res = await data.json();
   return res;
 };
