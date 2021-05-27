@@ -30,6 +30,11 @@
   @include media('>=desktop') {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  & a {
+    text-decoration: inherit;
+    color: inherit;
+  }
 }
 
 .search {

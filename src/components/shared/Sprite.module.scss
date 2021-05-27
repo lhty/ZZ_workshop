@@ -1,0 +1,14 @@
+.pictureWrap {
+  width: 232px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 80%;
+    filter: drop-shadow(4px 4px 4px transparent);
+  }
+}

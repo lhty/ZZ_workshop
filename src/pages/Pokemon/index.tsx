@@ -1,41 +1,30 @@
 import React from 'react';
-import { IPokemon } from '../../@types/pokemon';
 
-import { Modal, Typography } from '../../components';
+import { Sprite, Title, TypeLabels, Typography } from '../../components';
+import { usePokemonData } from '../../hooks';
 
 import styles from './Pokemon.module.scss';
 
-export interface IPokemonPageProps {
+const PokemonPage: React.FC<{
   id: number;
-}
-
-/* TBD */
-const PokemonPage: React.FC<IPokemonPageProps> = ({ id }) => {
-  const { data, isLoading, isError } = { data: {} as IPokemon, isLoading: false, isError: false };
-  if (isLoading) {
-    return <>Loading ...</>;
-  }
-
-  if (isError) {
-    return <>Error :(</>;
-  }
+}> = ({ id }) => {
+  const { data } = usePokemonData({ id });
 
   return (
-    <Modal id="pokemon" onClose={() => null}>
-      <div className={styles.root}>
-        <div className={styles.pictureWrap}>
-          <img
-            src={data?.sprites?.other?.['official-artwork'].front_default || data?.sprites?.front_default}
-            alt={`${data?.name} official-artwork`}
-          />
-        </div>
-        <div className={styles.stats_wrapper}>
-          <Typography size="l" className={styles.titleName}>
-            {data?.name}
-          </Typography>
-        </div>
+    <div className={styles.root}>
+      <div className={styles.leftWrap}>
+        <Sprite className={styles.pictureWrap} {...data} />
+        <TypeLabels className={styles.labelWrap} types={data?.types} />
       </div>
-    </Modal>
+      <div className={styles.infoWrap}>
+        <div className={styles.infoHead}>
+          <Title className={styles.infoName} text={data?.name} />
+          <Typography className={styles.infoGen}>Generation III</Typography>
+          <div className={styles.idBadge}>{id}</div>
+        </div>
+        <div className={styles.infoStats}>stats</div>
+      </div>
+    </div>
   );
 };
 

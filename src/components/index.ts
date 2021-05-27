@@ -8,4 +8,23 @@ import Card from './Card';
 import Highlight from './Typography/Highlight';
 import Modal from './Modal';
 
-export { Header, Layout, Button, Parallax, Footer, Typography, Highlight, Card, Modal };
+import TypeLabels from './shared/TypeLables';
+import Sprite from './shared/Sprite';
+import Stats from './shared/Stats';
+import Title from './shared/Title';
+
+export {
+  Header,
+  Layout,
+  Button,
+  Parallax,
+  Footer,
+  Typography,
+  Highlight,
+  Card,
+  Modal,
+  TypeLabels,
+  Sprite,
+  Stats,
+  Title,
+};

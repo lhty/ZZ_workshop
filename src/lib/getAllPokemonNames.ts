@@ -8,7 +8,7 @@ interface IgetAllPokemonNames {
   results: Array<IPokemon>;
 }
 
-export const getAllPokemonNames = async () => {
+export const getAllPokemonNames = async (): Promise<IgetAllPokemonNames> => {
   const { count } = await request('getPokemons');
   const results = await request<IgetAllPokemonNames>('getPokemons', {
     limit: count,

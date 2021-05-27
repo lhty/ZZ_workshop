@@ -5,7 +5,7 @@ import { useRoutes } from 'hookrouter';
 import Pokedex from './Pokedex';
 import { POKEDEX_ROUTES } from './pokedex.routes';
 
-const PokedexPage = React.memo(() => {
+const PokedexPage = () => {
   const routeResult = useRoutes(POKEDEX_ROUTES);
 
   return (
@@ -14,6 +14,6 @@ const PokedexPage = React.memo(() => {
       {routeResult}
     </>
   );
-});
+};
 
 export default PokedexPage;

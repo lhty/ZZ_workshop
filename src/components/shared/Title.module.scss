@@ -1,0 +1,15 @@
+@import '../../styles/variables';
+
+.titleText {
+  margin-bottom: 12px;
+  font-weight: 300;
+  letter-spacing: -1px;
+  text-shadow: 4px 4px 4px rgba(33, 33, 33, 0.1);
+  text-transform: capitalize;
+}
+.skeleton_title {
+  width: 120px;
+  height: 28px;
+  margin-bottom: 12px;
+  border-radius: $base_radius;
+}

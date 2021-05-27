@@ -1,0 +1,56 @@
+.statWrap {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.statItem {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  color: #4b4b4b;
+  width: 50px;
+  text-transform: capitalize;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.statValue {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 15px;
+  line-height: 18px;
+  margin: 0 auto 2px;
+}
+
+.hp {
+  border: 2px solid #46b511;
+  color: #277103;
+}
+
+.attack {
+  border: 2px solid #fb2715;
+  color: #c11c0e;
+}
+
+.defense {
+  border: 2px solid #f8af00;
+  color: #a47400;
+}
+
+.skeleton_value {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin: 0 auto 2px;
+}

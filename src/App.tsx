@@ -26,13 +26,11 @@ const App = () => {
   }, [queryClient]);
 
   return (
-    (
-      <QueryClientProvider client={queryClient}>
-        <Header />
-        {matchUrl}
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    ) || <NotFoundPage />
+    <QueryClientProvider client={queryClient}>
+      <Header />
+      {matchUrl || <NotFoundPage />}
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 };
 
