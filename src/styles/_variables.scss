@@ -15,7 +15,7 @@ $bgColors: (
   grass: #7ac74c,
   ice: #96d9d6,
   fighting: #c22e28,
-  poison: #a33ea1,
+  poison: #f06bed,
   ground: #e2bf65,
   flying: #a98ff3,
   psychic: #f95587,
@@ -29,7 +29,10 @@ $bgColors: (
 );
 
 //radius:
-$base_radius: 8px;
+$card_radius: 8px;
+$label_radius: 16px;
+$modal_radius: 16px;
 
 //shadow:
-$base_shadow: 4px 4px 4px #21212103; ;
+$base_shadow: 4px 4px 4px #21212103;
+$label_shadow: inset 0px -2px 0px #0000002e;

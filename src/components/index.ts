@@ -12,6 +12,7 @@ import TypeLabels from './shared/TypeLables';
 import Sprite from './shared/Sprite';
 import Stats from './shared/Stats';
 import Title from './shared/Title';
+import Box from './shared/Box';
 
 export {
   Header,
@@ -27,4 +28,5 @@ export {
   Sprite,
   Stats,
   Title,
+  Box,
 };

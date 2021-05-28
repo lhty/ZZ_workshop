@@ -4,25 +4,23 @@
   position: relative;
   display: flex;
   flex-flow: column wrap;
-  box-shadow: $base_shadow;
-  background: #f6f7f9;
-  border-radius: $base_radius;
   overflow: hidden;
   cursor: pointer;
-  transition: all ease-in-out 0.15s;
+}
 
+.infoWrap {
+  display: flex;
+  flex-flow: column;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 25px;
+  z-index: 1;
+}
+
+.card {
+  transition: all ease-in-out 0.15s;
   &:hover {
     transform: scale(1.03);
     transition: all ease-in-out 0s;
   }
-}
-
-.default {
-  background-color: #f6f7f9;
-}
-
-.infoWrap {
-  width: 100%;
-  padding: 12px 25px;
-  z-index: 1;
 }

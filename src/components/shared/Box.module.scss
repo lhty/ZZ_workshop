@@ -1,0 +1,49 @@
+@import '../../styles/variables';
+
+@each $key, $value in $bgColors {
+  .#{$key} {
+    background-color: $value;
+  }
+  .gradient_#{$key} {
+    background: linear-gradient(270deg, $value 0.15%, transparent 100%);
+  }
+
+  .gradient_darker#{$key} {
+    background: linear-gradient(270deg, $value 0.15%, darken($value, 20%) 100%);
+  }
+}
+
+.root {
+  overflow: hidden;
+}
+.default {
+  background-color: #f6f7f9;
+}
+.card {
+  border-radius: $card_radius;
+  box-shadow: $base_shadow;
+}
+.label {
+  height: 15px;
+  min-width: 60px;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 13px;
+  text-align: center;
+  color: $dark;
+  padding: 10px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+  border-radius: $label_radius;
+  box-shadow: $base_shadow;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+.modal {
+  border-radius: $modal_radius;
+  box-shadow: $base_shadow;
+}

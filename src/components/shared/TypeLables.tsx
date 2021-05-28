@@ -3,6 +3,7 @@ import React from 'react';
 import cn from 'classnames';
 import styles from './TypeLabels.module.scss';
 import shared from './Shared.module.scss';
+import { Box } from '..';
 
 import { Type } from '../../@types/pokemon';
 
@@ -19,9 +20,7 @@ const TypeLabels: React.FC<{ types?: Array<Type>; className?: string }> = ({ cla
   return (
     <div className={cn(className, styles.labelWrap)}>
       {types?.map(({ slot, type }) => (
-        <span key={slot} className={cn(styles.label, shared[type.name])}>
-          {type?.name}
-        </span>
+        <Box key={slot} type="label" color={type.name} />
       ))}
     </div>
   );

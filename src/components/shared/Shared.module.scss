@@ -1,14 +1,5 @@
 @import '../../styles/variables';
 
-@each $key, $value in $bgColors {
-  .#{$key} {
-    background-color: $value;
-  }
-  .gradient_#{$key} {
-    background: linear-gradient(270deg, $value 0.15%, transparent 100%);
-  }
-}
-
 .skeleton_box {
   position: relative;
   overflow: hidden;

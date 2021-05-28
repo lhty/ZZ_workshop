@@ -5,7 +5,6 @@
   display: flex;
   flex-direction: column;
   background-color: white;
-  border-radius: 16px;
   overflow: hidden;
 
   @include media('>=tablet') {
@@ -14,23 +13,28 @@
 }
 .leftWrap {
   position: relative;
-  flex-basis: 40%;
-  width: clamp(45%, 800px, 100%);
+  display: flex;
+  flex-direction: column-reverse;
+  flex-basis: 45%;
   min-height: 500px;
-  box-shadow: inset -20px -9px 100px 20px $white, 11px 8px 40px 3px #00000086;
 }
 .pictureWrap {
   width: 100%;
 }
 .labelWrap {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 25px;
+  padding: 16px 14px;
 }
 .infoWrap {
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
   flex-basis: 60%;
   padding: 25px 15px;
-  background: linear-gradient(180deg, #732119 42.19%, $dark 100%);
+  box-shadow: inset 50px 50px 123px -34px #000000ab;
 }
 .infoHead {
   display: flex;
@@ -39,29 +43,43 @@
 }
 .infoStats {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   gap: 10px;
+  height: 100%;
 }
 .infoName {
   font-style: normal;
   font-weight: bold;
   font-size: 36px;
-  line-height: 42px;
   color: $white;
 }
 .infoGen {
   font-style: normal;
   font-size: 20px;
+  font-weight: 200;
   color: $white;
 }
 .idBadge {
   background-color: $third;
   font-weight: bold;
-  width: 35px;
-  height: 35px;
+  min-width: 35px;
+  max-height: 35px;
+  padding: 10px;
   border-radius: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
   align-self: end;
+}
+.ability {
+  padding: 10px;
+}
+.resources {
+  padding: 10px;
+}
+.statWrapper {
+  background-color: $white;
+  border-radius: $card_radius;
+  padding-block: 10px;
+  gap: 5px;
 }

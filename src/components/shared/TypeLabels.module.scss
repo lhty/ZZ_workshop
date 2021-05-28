@@ -5,27 +5,6 @@
   justify-content: flex-start;
   align-items: flex-end;
 }
-.label {
-  box-shadow: inset 0px -2px 0px #0000002e;
-  border-radius: 11px;
-  height: 15px;
-  min-width: 60px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 13px;
-  text-align: center;
-  color: $dark;
-  padding: 10px 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 12px;
-
-  &:last-child {
-    margin-right: 0;
-  }
-}
 .skeleton_label {
   border-radius: 11px;
   min-height: 20px;

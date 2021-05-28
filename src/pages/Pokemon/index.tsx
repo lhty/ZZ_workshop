@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Sprite, Title, TypeLabels, Typography } from '../../components';
+import { Box, Sprite, Stats, Title, TypeLabels, Typography } from '../../components';
 import { usePokemonData } from '../../hooks';
 
 import styles from './Pokemon.module.scss';
@@ -11,7 +11,7 @@ const PokemonPage: React.FC<{
   const { data } = usePokemonData({ id });
 
   return (
-    <div className={styles.root}>
+    <Box type="modal" color={data?.types[0].type.name} className={styles.root}>
       <div className={styles.leftWrap}>
         <Sprite className={styles.pictureWrap} {...data} />
         <TypeLabels className={styles.labelWrap} types={data?.types} />
@@ -22,9 +22,13 @@ const PokemonPage: React.FC<{
           <Typography className={styles.infoGen}>Generation III</Typography>
           <div className={styles.idBadge}>{id}</div>
         </div>
-        <div className={styles.infoStats}>stats</div>
+        <div className={styles.infoStats}>
+          <Box className={styles.ability}>Abilities</Box>
+          <Box className={styles.resources}>HP EXP</Box>
+          <Stats className={styles.statWrapper} stats={data?.stats} />
+        </div>
       </div>
-    </div>
+    </Box>
   );
 };
 
