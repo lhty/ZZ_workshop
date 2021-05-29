@@ -35,9 +35,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 12px;
   border-radius: $label_radius;
-  box-shadow: $base_shadow;
+  box-shadow: $label_shadow;
 
   &:last-child {
     margin-right: 0;

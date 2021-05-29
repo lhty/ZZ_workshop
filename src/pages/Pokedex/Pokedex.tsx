@@ -6,7 +6,7 @@ import { Card, Highlight, Layout, Typography } from '../../components';
 import { range } from '../../lib';
 
 import { IPokemon } from '../../@types/pokemon';
-import { useDebounce, usePokemonData } from '../../hooks';
+import { useCachedData, useDebounce, usePokemonData } from '../../hooks';
 
 import styles from './Pokedex.module.scss';
 
@@ -26,12 +26,8 @@ const Pokedex = () => {
     },
   );
   const [debouncedSearch, setImmediate] = useDebounce<string>(search, 500);
-  const {
-    data: pokemon_data,
-    isFetching,
-    isError,
-    refetch,
-  } = usePokemonData({ limit, offset, search: debouncedSearch });
+  const { data: pokemon_data, isError, refetch } = usePokemonData({ limit, offset, search: debouncedSearch });
+  const cache = useCachedData();
 
   React.useEffect(() => {
     if (debouncedSearch) {
@@ -43,15 +39,23 @@ const Pokedex = () => {
     <div className={styles.root}>
       <Layout className={styles.layerWrap}>
         <Typography className={styles.description}>
-          800
           <Highlight>
-            <b>Pokemons</b>
+            <b> {cache?.count || 1118} Pokemons</b>
           </Highlight>
           for you to choose your favorite
         </Typography>
         <Search {...{ search, dispatch, setImmediate }} />
         <CheckBox />
-        <ContentGrid {...{ isError, isFetching, limit, offset, pokemon_data }} />
+        <ContentGrid
+          {...{
+            isError,
+            limit,
+            offset,
+            pokemon_data: pokemon_data?.slice(offset, offset + limit),
+            empty: range(0, limit),
+            isSearching: !!debouncedSearch,
+          }}
+        />
       </Layout>
     </div>
   );
@@ -59,34 +63,29 @@ const Pokedex = () => {
 
 interface IContentGrid {
   isError: boolean;
-  isFetching: boolean;
-  limit: number;
-  offset: number;
+  isSearching: boolean;
   pokemon_data?: IPokemon[];
+  empty?: number[];
 }
 
-const ContentGrid: React.FC<IContentGrid> = ({ isFetching, isError, pokemon_data, limit, offset }) => {
+const ContentGrid: React.FC<IContentGrid> = ({ isError, isSearching, pokemon_data, empty }) => {
   if (isError) {
     return <Typography className={styles.description}>Something went wrong</Typography>;
   }
 
-  if (!pokemon_data) {
+  if (!pokemon_data && isSearching) {
     return <Typography className={styles.description}>Nothing found :(</Typography>;
   }
 
   return (
     <div className={styles.contentWrap}>
-      {isFetching
-        ? range(0, limit).map((id) => <Card key={id} />)
-        : pokemon_data?.map(
-            ({ id, name, ...rest }, idx) =>
-              idx >= offset &&
-              idx <= limit && (
-                <A key={id} href={`pokedex/${id}`}>
-                  <Card {...{ id, name, ...rest }} />
-                </A>
-              ),
-          )}
+      {pokemon_data
+        ? pokemon_data.map((pokemon) => (
+            <A key={pokemon.id} href={`pokedex/${pokemon.id}`}>
+              <Card {...pokemon} />
+            </A>
+          ))
+        : empty?.map((skeleton) => <Card key={skeleton} />)}
     </div>
   );
 };

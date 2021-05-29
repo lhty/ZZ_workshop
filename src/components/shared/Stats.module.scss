@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .statWrap {
   display: flex;
   flex-flow: row wrap;
@@ -30,21 +32,23 @@
   font-style: normal;
   font-weight: 900;
   font-size: 15px;
+  line-height: 15px;
+  background: $white;
 }
 
 .hp {
-  border: 2px solid #46b511;
-  color: #277103;
+  border: 2px solid $hp;
+  color: lighten($hp, 5%);
 }
 
 .attack {
-  border: 2px solid #fb2715;
-  color: #c11c0e;
+  border: 2px solid $attack;
+  color: lighten($attack, 5%);
 }
 
 .defense {
-  border: 2px solid #f8af00;
-  color: #a47400;
+  border: 2px solid $defense;
+  color: lighten($defense, 5%);
 }
 
 .skeleton_value {

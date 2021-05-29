@@ -1,7 +1,7 @@
 import { request } from '.';
 import { IPokemon } from '../@types/pokemon';
 
-interface IgetAllPokemonNames {
+export interface IgetAllPokemonNames {
   count?: number;
   next?: string;
   previous?: string;

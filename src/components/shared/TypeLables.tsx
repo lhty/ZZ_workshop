@@ -18,7 +18,7 @@ const TypeLabels: React.FC<{ types?: Array<Type>; className?: string }> = ({ cla
   }
 
   return (
-    <div className={cn(className, styles.labelWrap)}>
+    <div className={cn(styles.labelWrap, className)}>
       {types?.map(({ slot, type }) => (
         <Box key={slot} type="label" color={type.name} />
       ))}

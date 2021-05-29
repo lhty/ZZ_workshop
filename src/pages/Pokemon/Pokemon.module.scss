@@ -16,24 +16,23 @@
   display: flex;
   flex-direction: column-reverse;
   flex-basis: 45%;
-  min-height: 500px;
+  min-height: #{'min(50vh, 500px)'};
 }
 .pictureWrap {
   width: 100%;
 }
 .labelWrap {
+  justify-content: flex-end;
   width: 100%;
-  display: flex;
-  flex-flow: column wrap;
-  gap: 25px;
   padding: 16px 14px;
+  z-index: 1;
 }
 .infoWrap {
   display: flex;
   flex-flow: column;
   gap: 20px;
   flex-basis: 60%;
-  padding: 25px 15px;
+  padding: 25px 20px 15px;
   box-shadow: inset 50px 50px 123px -34px #000000ab;
 }
 .infoHead {
@@ -50,7 +49,7 @@
 .infoName {
   font-style: normal;
   font-weight: bold;
-  font-size: 36px;
+  font-size: 40px;
   color: $white;
 }
 .infoGen {
