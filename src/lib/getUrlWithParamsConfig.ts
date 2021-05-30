@@ -1,11 +1,25 @@
 import config from '../config';
 
-export const getUrlWithParamsConfig = (action: string, query?: any) => {
-  const url = {
-    ...config.server,
-    ...config.client.endpoint[action].uri,
-    query: {},
+interface Iendpoint {
+  method: string;
+  uri: {
+    pathname: string;
+    query?: object;
   };
+}
+
+export const getUrlWithParamsConfig = (action: string, params?: object) => {
+  const { method, uri }: Iendpoint = config.client.endpoint[action];
+  let body = {};
+
+  const apiConfigUri = {
+    ...config.server,
+    ...uri,
+    query: { ...uri.query },
+  };
+
+  const query = { ...params };
+
   const pathname = Object.keys(query).reduce((acc, val) => {
     if (acc.includes(val)) {
       const result = acc.replace(`{${val}}`, query[val]);
@@ -13,10 +27,18 @@ export const getUrlWithParamsConfig = (action: string, query?: any) => {
       return result;
     }
     return acc;
-  }, url.pathname);
+  }, apiConfigUri.pathname);
 
-  url.pathname = pathname;
-  url.query = { ...query };
+  apiConfigUri.pathname = pathname;
 
-  return url;
+  if (method === 'GET') {
+    apiConfigUri.query = {
+      ...apiConfigUri.query,
+      ...query,
+    };
+  } else {
+    body = query;
+  }
+
+  return { method, uri: apiConfigUri, body };
 };
