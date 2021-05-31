@@ -3,12 +3,17 @@ type getterType = {
   uri: Record<'pathname', string>;
 };
 interface IConfig {
-  server: Record<'protocol' | 'host' | 'port', string>;
+  server: Record<string, number | string>;
+  api: Record<'protocol' | 'host' | 'port', string>;
   client: { endpoint: Record<string, getterType> };
 }
 
 const config: IConfig = {
   server: {
+    host: process.env.HOST || 'localhost',
+    port: process.env.PORT || 3000,
+  },
+  api: {
     protocol: 'https',
     host: 'pokeapi.co',
     port: '',

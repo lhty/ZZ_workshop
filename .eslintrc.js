@@ -14,7 +14,6 @@ module.exports = {
   plugins: ['prettier', 'react', '@typescript-eslint'],
   rules: {
     '@typescript-eslint/no-unused-vars': 'error',
-    'no-console': 'warn',
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx', '.ts', '.js'] }],
     'import/extensions': [
       'error',
@@ -37,6 +36,19 @@ module.exports = {
       0,
       {
         html: 'ignore',
+      },
+    ],
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'import/no-anonymous-default-export': [
+      'error',
+      {
+        allowArray: true,
+        allowArrowFunction: false,
+        allowAnonymousClass: false,
+        allowAnonymousFunction: false,
+        allowCallExpression: true, // The true value here is for backward compatibility
+        allowLiteral: false,
+        allowObject: false,
       },
     ],
     camelcase: 'off',

@@ -18,9 +18,9 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
   },
-  entry: path.resolve(__dirname, './src/index.ts'),
+  entry: path.join(__dirname, '../src/index.ts'),
   output: {
-    path: path.resolve(__dirname, './dist/'),
+    path: path.join(__dirname, '../dist/'),
     filename: 'main.js',
   },
   watchOptions: {
@@ -31,7 +31,7 @@ module.exports = {
     rules: [
       {
         test: /\.[tj]sx?$/,
-        exclude: [/node_modules/, path.resolve(__dirname, 'src/server/server.js')],
+        exclude: [/node_modules/, path.join(__dirname, '../src/server/server.js')],
         use: ['ts-loader'],
       },
       {
@@ -76,8 +76,8 @@ module.exports = {
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: path.resolve(__dirname, './public/index.html'),
-      favicon: path.resolve(__dirname, './public/favicon.ico'),
+      template: path.join(__dirname, '../public/index.html'),
+      favicon: path.join(__dirname, '../public/favicon.ico'),
     }),
   ],
 };

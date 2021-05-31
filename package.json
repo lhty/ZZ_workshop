@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint -c './.eslintrc' --fix './src/**/*.ts'",
     "build:prod": "env NODE_ENV=production webpack --config webpack.config.js webpack.config.js -p --progress",
     "start": "node dist/server.js",
-    "build": "webpack --config webpack.config.js --progress"
+    "build": "webpack --config webpack.config.js --progress",
+    "dev": "env NODE_ENV=development webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +28,8 @@
     "@svgr/webpack": "^5.5.0",
     "@testing-library/react-hooks": "^7.0.0",
     "@types/classnames": "^2.3.1",
+    "@types/hapi__hapi": "^20.0.8",
+    "@types/hapi__inert": "^5.2.2",
     "@types/hookrouter": "^2.2.5",
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.5",

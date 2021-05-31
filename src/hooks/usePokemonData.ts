@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQueries, useQuery } from 'react-query';
 import { IPokemon } from '../@types/pokemon';
 import { cache_names } from '../config';
 import { getAllPokemonNames, getPokemonData, request } from '../lib';
@@ -18,13 +18,21 @@ export const usePokemonData = ({ limit = 30, offset = 0, search, id }: IPokemonD
   const { data: allPokemons } = useQuery([cache_names.pokemon_names], getAllPokemonNames);
   const data = allPokemons?.results.slice(offset, offset + limit);
 
-  return useQuery(
-    [cache_names.pokemon_data, { id, search, limit, offset }],
-    () => getSelectedPokemonData({ data, search, id }),
-    {
-      enabled: !!data,
-      keepPreviousData: true,
-    },
+  // return useQuery(
+  //   [cache_names.pokemon_data, { id, search, limit, offset }],
+  //   () => getSelectedPokemonData({ data, search, id }),
+  //   {
+  //     enabled: !!data,
+  //     keepPreviousData: true,
+  //   },
+  // );
+  return useQueries(
+    data?.map(({ id }) => {
+      return {
+        queryKey: ['pokemon', id],
+        queryFn: () => getSelectedPokemonData({ id }),
+      };
+    }),
   );
 };
 

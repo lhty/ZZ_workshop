@@ -10,9 +10,9 @@ module.exports = {
   },
   mode: isProd() || 'development',
   devtool: 'source-map',
-  entry: path.resolve(__dirname, './src/server/server.js'),
+  entry: path.join(__dirname, '../src/server/server.ts'),
   output: {
-    path: path.resolve(__dirname, './dist/'),
+    path: path.join(__dirname, '../dist/'),
     filename: 'server.js',
   },
   externals: [nodeExternals()],
