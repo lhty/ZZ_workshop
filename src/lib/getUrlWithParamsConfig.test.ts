@@ -32,14 +32,3 @@ describe('getUrlWithParamsConfig', () => {
     });
   });
 });
-
-const toCapitalizeFirstLetter = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
-
-describe('toCapitalizeFirstLetter test', () => {
-  test('Recieve "test" should return "Test"', () => {
-    expect(toCapitalizeFirstLetter('test')).toEqual('Test');
-  });
-  test('Recieve "" should return "bad input"', () => {
-    expect(toCapitalizeFirstLetter('')).toEqual('');
-  });
-});

@@ -21,19 +21,13 @@ const Pokedex = () => {
     (prev, update) => ({ ...prev, ...update }),
     {
       search: '',
-      limit: 50,
+      limit: 30,
       offset: 0,
     },
   );
   const [debouncedSearch, setImmediate] = useDebounce<string>(search, 500);
-  const { data: pokemon_data, isError, refetch } = usePokemonData({ limit, offset, search: debouncedSearch });
+  const { data: pokemon_data, isLoading, isIdle, isError } = usePokemonData({ limit, offset, search: debouncedSearch });
   const cache = useCachedData();
-
-  React.useEffect(() => {
-    if (debouncedSearch) {
-      refetch();
-    }
-  }, [debouncedSearch, refetch]);
 
   return (
     <div className={styles.root}>
@@ -48,12 +42,13 @@ const Pokedex = () => {
         <CheckBox />
         <ContentGrid
           {...{
+            isLoading,
             isError,
+            isIdle,
             limit,
             offset,
             pokemon_data: pokemon_data?.slice(offset, offset + limit),
             empty: range(0, limit),
-            isSearching: !!debouncedSearch,
           }}
         />
       </Layout>
@@ -62,18 +57,19 @@ const Pokedex = () => {
 };
 
 interface IContentGrid {
+  isLoading: boolean;
   isError: boolean;
-  isSearching: boolean;
+  isIdle: boolean;
   pokemon_data?: IPokemon[];
   empty?: number[];
 }
 
-const ContentGrid: React.FC<IContentGrid> = ({ isError, isSearching, pokemon_data, empty }) => {
+const ContentGrid: React.FC<IContentGrid> = ({ isLoading, isError, isIdle, pokemon_data, empty }) => {
   if (isError) {
     return <Typography className={styles.description}>Something went wrong</Typography>;
   }
 
-  if (!pokemon_data && isSearching) {
+  if (!isIdle && !pokemon_data?.length && !isLoading) {
     return <Typography className={styles.description}>Nothing found :(</Typography>;
   }
 

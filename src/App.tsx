@@ -18,7 +18,7 @@ const App = () => {
   const matchUrl = useRoutes(ROUTES);
   const queryClient = React.useMemo(() => new QueryClient(), []);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     const prefetchAllPokemons = async () => {
       await queryClient.prefetchQuery(cache_names.pokemon_names, getAllPokemonNames);
     };

@@ -10,16 +10,17 @@ interface IPokemonData {
   id?: number;
 }
 
-interface ISelectedPokemonData extends IPokemonData {
+interface ISelectedPokemonData extends Partial<IPokemonData> {
   data?: IPokemon[];
 }
 
-export const usePokemonData = ({ limit, offset, search, id }: IPokemonData) => {
-  const { data } = useQuery([cache_names.pokemon_names], getAllPokemonNames);
+export const usePokemonData = ({ limit = 30, offset = 0, search, id }: IPokemonData) => {
+  const { data: allPokemons } = useQuery([cache_names.pokemon_names], getAllPokemonNames);
+  const data = allPokemons?.results.slice(offset, offset + limit);
 
   return useQuery(
-    [cache_names.pokemon_data, id],
-    () => getSelectedPokemonData({ data: data?.results, limit, offset, search, id }),
+    [cache_names.pokemon_data, { id, search, limit, offset }],
+    () => getSelectedPokemonData({ data, search, id }),
     {
       enabled: !!data,
       keepPreviousData: true,
@@ -27,7 +28,7 @@ export const usePokemonData = ({ limit, offset, search, id }: IPokemonData) => {
   );
 };
 
-const getSelectedPokemonData = async ({ data, limit = 50, offset = 0, search = '', id }: ISelectedPokemonData) => {
+const getSelectedPokemonData = async ({ data, search, id }: ISelectedPokemonData) => {
   if (search && !data) return null;
 
   if (id) {
@@ -35,14 +36,11 @@ const getSelectedPokemonData = async ({ data, limit = 50, offset = 0, search = '
     return result;
   }
 
-  if (Array.isArray(data)) {
-    const allPokemonNames = search
-      ? data?.filter(({ name }) => new RegExp(search).test(name)).slice(offset, limit)
-      : data?.slice(offset, limit);
-
-    const results = await getPokemonData<IPokemon[]>('url', allPokemonNames);
+  if (Array.isArray(data) && search) {
+    const found = data?.filter(({ name }) => new RegExp(search).test(name));
+    const results = await getPokemonData<IPokemon[]>('url', found);
     return results;
   }
-  const result = await getPokemonData<IPokemon>('url', data);
+  const result = await getPokemonData<IPokemon | IPokemon[]>('url', data);
   return result;
 };
