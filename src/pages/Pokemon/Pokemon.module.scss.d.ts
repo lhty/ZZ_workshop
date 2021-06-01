@@ -3,7 +3,6 @@
 interface CssExports {
   ability: string;
   idBadge: string;
-  infoGen: string;
   infoHead: string;
   infoName: string;
   infoStats: string;
@@ -11,8 +10,10 @@ interface CssExports {
   labelWrap: string;
   leftWrap: string;
   pictureWrap: string;
-  resources: string;
   root: string;
+  'special-attack': string;
+  'special-defense': string;
+  speed: string;
   statWrapper: string;
 }
 export const cssExports: CssExports;

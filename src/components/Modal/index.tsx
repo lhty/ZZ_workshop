@@ -6,11 +6,11 @@ import { usePortal } from '../../hooks';
 import { ReactComponent as CloseButton } from './assets/closeIcon.svg';
 import styles from './Modal.module.scss';
 
-const Modal: React.FC<{ id: string; onClose: () => void }> = ({ children, id, onClose }) => {
+const Modal: React.FC<{ id?: string }> = ({ children, id = 'modal card' }) => {
   const [target] = usePortal(id, styles.root);
   const wrapper = (
     <div className={styles.wrapper}>
-      <CloseButton type="button" className={styles.close} onClick={onClose}>
+      <CloseButton type="button" className={styles.close} onClick={() => target.remove()}>
         Close
       </CloseButton>
       {children}

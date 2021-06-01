@@ -1,30 +1,41 @@
 import React from 'react';
 
-import { HomePage, LegendsPage, PokedexPage } from './pages';
+import { Modal } from './components';
+import { HomePage, LegendsPage, PokedexPage, PokemonPage } from './pages';
 
 export enum LinkEnum {
   HOME = '/',
-  POKEDEX = '/pokedex*',
+  POKEDEX = '/pokedex',
+  POKEMON = '/pokedex/:id',
   LEGENDARIES = '/legendaries',
   DOCUMENTATION = '/documentation',
 }
 
-interface RouteElement {
-  title: string;
-  link: LinkEnum;
-  component: React.FC<React.PropsWithChildren<any>>;
-}
+type componentType = React.FC<React.PropsWithChildren<any>>;
 
-export const MAIN_MENU: Array<RouteElement> = [
+export const MAIN_MENU = [
   { title: 'Home', link: LinkEnum.HOME, component: () => <HomePage /> },
   { title: 'Pokédex', link: LinkEnum.POKEDEX, component: () => <PokedexPage /> },
   { title: 'Legendaries', link: LinkEnum.LEGENDARIES, component: () => <LegendsPage /> },
   { title: 'Documentation', link: LinkEnum.DOCUMENTATION, component: () => <HomePage /> },
 ];
 
-const ROUTES = MAIN_MENU.reduce((acc, { link, component }) => {
+const MAIN_ROUTES: Record<string, componentType> = MAIN_MENU.reduce((acc, { link, component }) => {
   acc[link] = component;
   return acc;
-}, {} as Record<string, React.FC>);
+}, {});
+
+const MODAL_ROUTES: Record<string, componentType> = {
+  [LinkEnum.POKEMON]: ({ id }: { id: number }) => (
+    <Modal>
+      <PokemonPage id={id} />
+    </Modal>
+  ),
+};
+
+const ROUTES = {
+  ...MAIN_ROUTES,
+  ...MODAL_ROUTES,
+};
 
 export default ROUTES;

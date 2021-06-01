@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint -c './.eslintrc' --fix './src/**/*.ts'",
+    "lint": "eslint -c './.eslintrc.js' --fix './src/**/*.ts'",
+    "pretty": "pretty-quick --staged",
     "build:prod": "env NODE_ENV=production webpack --config webpack.config.js webpack.config.js -p --progress",
     "start": "node dist/server.js",
     "build": "webpack --config webpack.config.js --progress",
@@ -56,7 +57,7 @@
     "jest": "^27.0.3",
     "lint-staged": "^10.5.1",
     "node-sass": "^6.0.0",
-    "prettier": "^2.1.2",
+    "prettier": "^2.3.0",
     "pretty-quick": "^3.1.0",
     "react-test-renderer": "^17.0.2",
     "sass-loader": "^10.0.4",
