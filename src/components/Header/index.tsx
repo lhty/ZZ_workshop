@@ -25,7 +25,7 @@ const Header: React.FC = () => {
 
 const NavMenu = () => {
   const path = usePath();
-  // console.log(path);
+
   return (
     <>
       {MAIN_MENU.map(({ title, link }) => (

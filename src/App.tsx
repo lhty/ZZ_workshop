@@ -7,7 +7,7 @@ import { useRoutes } from 'hookrouter';
 import ROUTES from './routes';
 
 import { cache_names } from './config';
-import { getAllPokemonNames } from './lib';
+import { prefetchPokemonGeneralData } from './lib';
 
 import { NotFoundPage } from './pages';
 import { Header } from './components';
@@ -20,7 +20,7 @@ const App = () => {
 
   React.useEffect(() => {
     const prefetchAllPokemons = async () => {
-      await queryClient.prefetchQuery(cache_names.pokemon_names, getAllPokemonNames);
+      await queryClient.prefetchQuery(cache_names.pokemon_raw, prefetchPokemonGeneralData);
     };
     prefetchAllPokemons();
   }, [queryClient]);

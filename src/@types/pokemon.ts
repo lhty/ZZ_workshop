@@ -32,6 +32,11 @@ export interface Species {
   url: string;
 }
 
+export interface IPokemonUrl {
+  name: string;
+  url: string;
+}
+
 export interface GameIndex {
   game_index: number;
   version: Species;

@@ -26,10 +26,22 @@ const config: IConfig = {
           pathname: '/api/v2/pokemon',
         },
       },
+      getPokemonTypes: {
+        method: 'GET',
+        uri: {
+          pathname: '/api/v2/type',
+        },
+      },
       getPokemonById: {
         method: 'GET',
         uri: {
           pathname: '/api/v2/pokemon/{id}',
+        },
+      },
+      getPokemonsByType: {
+        method: 'GET',
+        uri: {
+          pathname: '/api/v2/type/{type}',
         },
       },
     },
@@ -37,7 +49,7 @@ const config: IConfig = {
 };
 
 export enum cache_names {
-  pokemon_names = 'all_pokemon_names',
+  pokemon_raw = 'all_pokemon_raw',
   pokemon_data = 'pokedex',
   pokemon = 'pokemon',
 }

@@ -2,6 +2,7 @@
 // Please do not change this file!
 interface CssExports {
   ability: string;
+  error: string;
   idBadge: string;
   infoHead: string;
   infoName: string;

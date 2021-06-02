@@ -3,6 +3,8 @@
 interface CssExports {
   description: string;
   filters: string;
+  filters_active: string;
+  filters_dropdown: string;
   layerWrap: string;
   root: string;
   search: string;

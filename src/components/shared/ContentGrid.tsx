@@ -1,23 +1,19 @@
 import React from 'react';
-import { A } from 'hookrouter';
+import { setQueryParams } from 'hookrouter';
 import { Typography, Card } from '..';
-import { usePokedexData } from '../../hooks';
 import { range } from '../../lib';
 import styles from './ContentGrid.module.scss';
+import { IPokemon } from '../../@types/pokemon';
 
 interface IContentGrid {
-  limit: number;
-  offset: number;
-  search: string;
+  data?: IPokemon[];
+  isLoading: boolean;
+  isIdle: boolean;
+  isError: boolean;
+  isFetching: boolean;
 }
 
-const ContentGrid: React.FC<IContentGrid> = ({ limit, offset, search }) => {
-  const { data, isLoading, isIdle, isError } = usePokedexData({
-    limit,
-    offset,
-    search,
-  });
-
+const ContentGrid: React.FC<IContentGrid> = ({ data, isLoading, isIdle, isError, isFetching }) => {
   if (isError) {
     return <Typography>Something went wrong</Typography>;
   }
@@ -26,13 +22,23 @@ const ContentGrid: React.FC<IContentGrid> = ({ limit, offset, search }) => {
     return <Typography>Nothing found :(</Typography>;
   }
 
+  const setIdHandler = (e: React.MouseEvent | React.KeyboardEvent) => {
+    setQueryParams({ id: e.currentTarget.getAttribute('data-id') });
+  };
+
   return (
     <div className={styles.contentWrap}>
-      {data
-        ? data.map((pokemon) => (
-            <A key={pokemon.id} href={`pokedex/${pokemon.id}`}>
+      {!isFetching
+        ? data?.map((pokemon) => (
+            <div
+              data-id={pokemon.id}
+              tabIndex={0}
+              role="link"
+              onClick={setIdHandler}
+              onKeyPress={setIdHandler}
+              key={pokemon.id}>
               <Card {...pokemon} />
-            </A>
+            </div>
           ))
         : range(0, 20).map((skeleton) => <Card key={skeleton} />)}
     </div>

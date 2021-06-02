@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Sprite, Stats, Title, TypeLabels } from '../../components';
+import { Box, Sprite, Stats, Title, TypeLabels, Typography } from '../../components';
 import { usePokemonData } from '../../hooks';
 
 import styles from './Pokemon.module.scss';
@@ -8,7 +8,15 @@ import styles from './Pokemon.module.scss';
 const PokemonPage: React.FC<{
   id: number;
 }> = ({ id }) => {
-  const { data } = usePokemonData(id);
+  const { data, isFetching, isError } = usePokemonData(id);
+
+  if (!isFetching && isError) {
+    return (
+      <Box type="modal" className={styles.root}>
+        <Typography className={styles.error}>Not found :(</Typography>
+      </Box>
+    );
+  }
 
   return (
     <Box type="modal" color={data?.types[0].type.name} className={styles.root}>
@@ -19,7 +27,7 @@ const PokemonPage: React.FC<{
       <div className={styles.infoWrap}>
         <div className={styles.infoHead}>
           <Title className={styles.infoName} text={data?.name} />
-          <div className={styles.idBadge}>{id}</div>
+          {data && <div className={styles.idBadge}>{id}</div>}
         </div>
         <div className={styles.infoStats}>
           <Box className={styles.ability}>

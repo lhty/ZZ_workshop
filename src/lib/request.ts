@@ -1,7 +1,7 @@
 import { format } from 'url';
 import { getUrlWithParamsConfig } from '.';
 
-export const request = async <T>(action: string, query?: Record<string, number>): Promise<T> => {
+export const request = async <T>(action: string, query?: Record<string, number | string>): Promise<T> => {
   const { method, uri, body } = getUrlWithParamsConfig(action, query);
 
   const options: Record<string, string> = { method };
