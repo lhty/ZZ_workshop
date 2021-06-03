@@ -7,7 +7,10 @@ $white: #f2f2f2;
 $dark: #212121;
 $hp: #4b852a;
 $defense: #705746;
+$special_defense: #522507;
 $attack: #942e2a;
+$special_attack: #f07110;
+$speed: #6390f0;
 
 //bg colors:
 $bgColors: (
@@ -32,6 +35,7 @@ $bgColors: (
 );
 
 //radius:
+$button_radius: 3px;
 $card_radius: 8px;
 $label_radius: 16px;
 $modal_radius: 16px;
@@ -39,3 +43,5 @@ $modal_radius: 16px;
 //shadow:
 $base_shadow: 4px 4px 4px #21212103;
 $label_shadow: inset 0px -2px 0px #0000002e;
+$button_shadow: 2px 2px 2px #2121211a;
+$focus_shadow: 5px 4px 4px #0000001c;

@@ -12,15 +12,16 @@ const DEFAULTS: Stat[] = [
   { base_stat: 0, effort: 0, stat: { name: 'defense', url: '' } },
 ];
 
-const Stats: React.FC<{ stats?: Stat[]; className?: string }> = ({ stats, className }) => {
+const Stats: React.FC<{ stats?: Stat[]; className?: string; extend?: object }> = ({ stats, extend, className }) => {
+  const extended = { ...styles, ...extend };
   return (
     <div className={styles.statWrap}>
       {(stats || DEFAULTS).map(
         ({ base_stat, stat }) =>
-          Object.keys(styles).includes(stat.name) && (
+          Object.keys(extended).includes(stat.name) && (
             <div key={stat.name} className={cn(styles.statItem, className)}>
               {stats ? (
-                <div className={cn(styles.statValue, styles[stat.name])}>{base_stat}</div>
+                <div className={cn(styles.statValue, extended[stat.name])}>{base_stat}</div>
               ) : (
                 <div className={cn(styles.skeleton_value, shared.skeleton_box)} />
               )}

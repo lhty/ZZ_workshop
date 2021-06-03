@@ -15,14 +15,14 @@
   position: relative;
   display: flex;
   flex-direction: column-reverse;
-  flex-basis: 45%;
-  min-height: #{'min(50vh, 500px)'};
+  flex-basis: 65%;
+  min-height: #{'min(50vh, 350px)'};
 }
 .pictureWrap {
   width: 100%;
 }
 .labelWrap {
-  justify-content: flex-end;
+  justify-content: flex-start;
   width: 100%;
   padding: 16px 14px;
   z-index: 1;
@@ -31,7 +31,7 @@
   display: flex;
   flex-flow: column;
   gap: 20px;
-  flex-basis: 60%;
+  flex-basis: 35%;
   padding: 25px 20px 15px;
   box-shadow: inset 50px 50px 123px -34px #000000ab;
 }
@@ -52,33 +52,49 @@
   font-size: 40px;
   color: $white;
 }
-.infoGen {
-  font-style: normal;
-  font-size: 20px;
-  font-weight: 200;
-  color: $white;
-}
 .idBadge {
   background-color: $third;
   font-weight: bold;
   min-width: 35px;
   max-height: 35px;
-  padding: 10px;
+  padding: 15px;
   border-radius: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
-  align-self: end;
+  align-self: center;
+  margin-left: 15px;
 }
 .ability {
+  width: fit-content;
   padding: 10px;
-}
-.resources {
-  padding: 10px;
+
+  & * {
+    cursor: pointer;
+    padding: 2px 0;
+    text-transform: capitalize;
+  }
 }
 .statWrapper {
   background-color: $white;
   border-radius: $card_radius;
   padding-block: 10px;
   gap: 5px;
+}
+
+.speed {
+  border: 2px solid $speed;
+  color: lighten($speed, 5%);
+}
+.special-attack {
+  border: 2px solid $special_attack;
+  color: lighten($special_attack, 5%);
+}
+.special-defense {
+  border: 2px solid $special_defense;
+  color: lighten($special_defense, 5%);
+}
+.error {
+  padding: 150px 25px;
+  margin: 0 auto;
 }

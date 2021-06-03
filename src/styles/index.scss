@@ -9,6 +9,16 @@
   padding: 0px;
   box-sizing: border-box;
 }
+*:focus:not(:hover, a, span) {
+  transition: all ease-in-out 0.15s;
+  outline-color: #21212178;
+  outline-style: dashed;
+  outline-width: medium;
+}
+*:focus {
+  outline: none;
+}
+
 body {
   font-family: 'Karla', sans-serif;
   font-style: normal;

@@ -1,4 +1,3 @@
-@import '../../styles/breakpoints';
 @import '../../styles/variables';
 
 .root {
@@ -13,27 +12,15 @@
   gap: 35px;
 }
 
-.contentWrap {
-  display: grid;
-  grid-gap: 32px;
-  grid-template-columns: 1fr;
-  grid-auto-rows: minmax(147px, auto);
+.description {
+  align-self: center;
+  font-size: 35px;
+  font-weight: 300;
+  text-align: center;
 
-  @include media('>=phone') {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include media('>=tablet') {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @include media('>=desktop') {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  & a {
-    text-decoration: inherit;
-    color: inherit;
+  & b {
+    padding: 0 0.5ch;
+    letter-spacing: -2px;
   }
 }
 
@@ -50,31 +37,55 @@
   font-weight: 300;
 }
 
-.description {
-  align-self: center;
-  font-size: 35px;
-  font-weight: 300;
-  text-align: center;
-
-  & b {
-    padding: 0 0.5ch;
-    letter-spacing: -2px;
-  }
-}
-
 .filters {
+  position: relative;
   display: flex;
   justify-content: center;
+  font-size: 16px;
+  font-weight: 400;
+  width: fit-content;
 
-  & select {
-    box-shadow: $base_shadow;
-    border-radius: $card_radius;
+  & button {
+    cursor: pointer;
     width: 135px;
-    text-align-last: center;
     border: none;
     outline: none;
-    scroll-behavior: smooth;
     background: #f2f2f2;
     padding: 5px;
+    box-shadow: $button_shadow;
+    border-radius: $button_radius;
+  }
+
+  &_dropdown {
+    position: absolute;
+    z-index: 2;
+    width: 135px;
+    top: 32px;
+    display: flex;
+    gap: 8px;
+    padding: 5px;
+    flex-flow: column wrap;
+    background: #f2f2f2;
+    box-shadow: $button_shadow;
+    border-radius: $button_radius;
+
+    & div {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: capitalize;
+      padding-left: 25px;
+
+      &:focus {
+        outline-color: #21212178;
+        outline-style: dashed;
+        outline-width: thin;
+      }
+    }
+
+    & input {
+      outline: none;
+    }
   }
 }

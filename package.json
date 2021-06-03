@@ -4,14 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:dev": "env NODE_ENV=development webpack --config webpack.config.js",
-    "build:prod": "env NODE_ENV=production webpack --config webpack.config.js",
-    "start": "env NODE_ENV=development webpack-dev-server"
+    "lint": "eslint -c './.eslintrc.js' --fix './src/**/*.ts'",
+    "pretty": "pretty-quick --staged",
+    "build:prod": "env NODE_ENV=production webpack --config webpack.config.js webpack.config.js -p --progress",
+    "start": "node dist/server.js",
+    "build": "webpack --config webpack.config.js --progress",
+    "dev": "env NODE_ENV=development webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hapi/hapi": "^20.1.3",
+    "@hapi/inert": "^6.0.3",
     "classnames": "^2.3.1",
+    "handlebars": "^4.7.7",
     "hookrouter": "^1.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -21,7 +27,10 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^5.5.0",
+    "@testing-library/react-hooks": "^7.0.0",
     "@types/classnames": "^2.3.1",
+    "@types/hapi__hapi": "^20.0.8",
+    "@types/hapi__inert": "^5.2.2",
     "@types/hookrouter": "^2.2.5",
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.5",
@@ -48,8 +57,9 @@
     "jest": "^27.0.3",
     "lint-staged": "^10.5.1",
     "node-sass": "^6.0.0",
-    "prettier": "^2.1.2",
+    "prettier": "^2.3.0",
     "pretty-quick": "^3.1.0",
+    "react-test-renderer": "^17.0.2",
     "sass-loader": "^10.0.4",
     "style-loader": "^2.0.0",
     "ts-jest": "^27.0.1",
@@ -58,7 +68,8 @@
     "url-loader": "^4.1.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-node-externals": "^3.0.0"
   },
   "husky": {
     "hooks": {

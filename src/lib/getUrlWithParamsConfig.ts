@@ -13,7 +13,7 @@ export const getUrlWithParamsConfig = (action: string, params?: object) => {
   let body = {};
 
   const apiConfigUri = {
-    ...config.server,
+    ...config.api,
     ...uri,
     query: { ...uri.query },
   };

@@ -1,0 +1,25 @@
+@import '../../styles/breakpoints';
+
+.contentWrap {
+  display: grid;
+  grid-gap: 32px;
+  grid-template-columns: 1fr;
+  grid-auto-rows: minmax(147px, auto);
+
+  @include media('>=phone') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media('>=tablet') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media('>=desktop') {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  & a {
+    text-decoration: inherit;
+    color: inherit;
+  }
+}

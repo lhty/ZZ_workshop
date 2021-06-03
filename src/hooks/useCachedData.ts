@@ -1,9 +1,9 @@
 import { useQueryClient } from 'react-query';
 import { cache_names } from '../config';
-import { IgetAllPokemonNames } from '../lib/getAllPokemonNames';
+import { IprefetchPokemonGeneralData } from '../lib/prefetchPokemonGeneralData';
 
 export const useCachedData = () => {
-  const cache = useQueryClient().getQueryData([cache_names.pokemon_names]) as IgetAllPokemonNames;
+  const cache = useQueryClient().getQueryData([cache_names.pokemon_raw]) as IprefetchPokemonGeneralData;
 
   return cache;
 };

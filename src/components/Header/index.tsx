@@ -23,10 +23,9 @@ const Header: React.FC = () => {
   );
 };
 
-// eslint-disable-next-line spaced-comment
-/* React 16 array return type no solution in TS without <></> hack so far(*/
-const NavMenu: React.FC = () => {
+const NavMenu = () => {
   const path = usePath();
+
   return (
     <>
       {MAIN_MENU.map(({ title, link }) => (

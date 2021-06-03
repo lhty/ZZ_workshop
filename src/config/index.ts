@@ -3,12 +3,17 @@ type getterType = {
   uri: Record<'pathname', string>;
 };
 interface IConfig {
-  server: Record<'protocol' | 'host' | 'port', string>;
+  server: Record<string, number | string>;
+  api: Record<'protocol' | 'host' | 'port', string>;
   client: { endpoint: Record<string, getterType> };
 }
 
 const config: IConfig = {
   server: {
+    host: process.env.HOST || 'localhost',
+    port: process.env.PORT || 3000,
+  },
+  api: {
     protocol: 'https',
     host: 'pokeapi.co',
     port: '',
@@ -21,10 +26,22 @@ const config: IConfig = {
           pathname: '/api/v2/pokemon',
         },
       },
+      getPokemonTypes: {
+        method: 'GET',
+        uri: {
+          pathname: '/api/v2/type',
+        },
+      },
       getPokemonById: {
         method: 'GET',
         uri: {
           pathname: '/api/v2/pokemon/{id}',
+        },
+      },
+      getPokemonsByType: {
+        method: 'GET',
+        uri: {
+          pathname: '/api/v2/type/{type}',
         },
       },
     },
@@ -32,8 +49,9 @@ const config: IConfig = {
 };
 
 export enum cache_names {
-  pokemon_names = 'pokemon_names',
-  pokemon_data = 'pokemon_data',
+  pokemon_raw = 'all_pokemon_raw',
+  pokemon_data = 'pokedex',
+  pokemon = 'pokemon',
 }
 
 export default config;

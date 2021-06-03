@@ -1,17 +1,22 @@
 import React from 'react';
 
-export const usePortal = (id: string, classname: string) => {
-  const parentElemRef = React.useRef(document.body);
-  const portalElemRef = React.useRef(document.getElementById(id) || document.createElement('div'));
-  portalElemRef.current.className = classname;
+export const usePortal = (id: string, classname: string, condition?: boolean) => {
+  const parentElemRef = React.useRef<HTMLElement>(document.body);
+  const portalElemRef = React.useRef<HTMLElement>(document.getElementById(id) || document.createElement('div'));
 
   React.useEffect(() => {
     const portal = portalElemRef.current;
+
+    if (!condition) {
+      return;
+    }
+
+    portalElemRef.current.className = classname;
     parentElemRef.current.insertBefore(portal, parentElemRef.current.firstChild);
     return () => {
       portal.remove();
     };
-  }, [id]);
+  }, [id, classname, condition]);
 
   return [portalElemRef.current];
 };

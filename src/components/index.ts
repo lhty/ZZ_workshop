@@ -13,6 +13,7 @@ import Sprite from './shared/Sprite';
 import Stats from './shared/Stats';
 import Title from './shared/Title';
 import Box from './shared/Box';
+import ContentGrid from './shared/ContentGrid';
 
 export {
   Header,
@@ -29,4 +30,5 @@ export {
   Stats,
   Title,
   Box,
+  ContentGrid,
 };
