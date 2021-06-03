@@ -22,11 +22,11 @@
   }
 
   @include media('>laptop') {
-    padding: 0 150px;
+    padding-left: 150px;
   }
 
   @include media('>desktop') {
-    padding: 0 250px;
+    padding-left: 250px;
   }
 }
 .contentText {
