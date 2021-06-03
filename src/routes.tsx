@@ -1,12 +1,10 @@
 import React from 'react';
 
-import { Modal } from './components';
-import { HomePage, LegendsPage, PokedexPage, PokemonPage } from './pages';
+import { HomePage, LegendsPage, PokedexPage } from './pages';
 
 export enum LinkEnum {
   HOME = '/',
   POKEDEX = '/pokedex',
-  POKEMON = '/pokedex/:id',
   LEGENDARIES = '/legendaries',
   DOCUMENTATION = '/documentation',
 }
@@ -25,17 +23,8 @@ const MAIN_ROUTES: Record<string, componentType> = MAIN_MENU.reduce((acc, { link
   return acc;
 }, {});
 
-const MODAL_ROUTES: Record<string, componentType> = {
-  [LinkEnum.POKEMON]: ({ id }: { id: number }) => (
-    <Modal>
-      <PokemonPage id={id} />
-    </Modal>
-  ),
-};
-
 const ROUTES = {
   ...MAIN_ROUTES,
-  ...MODAL_ROUTES,
 };
 
 export default ROUTES;

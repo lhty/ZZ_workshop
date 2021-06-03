@@ -56,27 +56,3 @@ const getPokedexData = async ({
   const result = await getPokemonData<IPokemonUrl | IPokemonUrl[]>('url', data);
   return result;
 };
-
-// return useTypedQueries([
-//   {
-//     queryKey: [cache_names.pokemon_data, { limit, offset, search }],
-//     queryFn: () => getSelectedPokemonData({ data, search, id }),
-//     ...{
-//       enabled: !!data,
-//       // keepPreviousData: true,
-//     },
-//   },
-//   {
-//     queryKey: [cache_names.pokemon, { id }],
-//     queryFn: () => getSelectedPokemonData({ id }),
-//     ...{
-//       enabled: !!id,
-//       keepPreviousData: true,
-//     },
-//   },
-// ]);
-
-// /* Issue #1675 */
-// const useTypedQueries = <TQueryFnData = unknown, TError = unknown, TData = TQueryFnData>(
-//   queries: UseQueryOptions<TQueryFnData, TError, TData>[],
-// ) => useQueries(queries as UseQueryOptions<unknown, unknown, unknown>[]) as QueryObserverResult<TQueryFnData, TError>[];

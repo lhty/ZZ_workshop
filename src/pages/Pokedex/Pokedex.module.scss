@@ -69,15 +69,23 @@
     box-shadow: $button_shadow;
     border-radius: $button_radius;
 
-    & span {
+    & div {
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       text-transform: capitalize;
-      font-size: 14px;
-      padding-left: 30%;
+      padding-left: 25px;
+
+      &:focus {
+        outline-color: #21212178;
+        outline-style: dashed;
+        outline-width: thin;
+      }
     }
-  }
-  &_active {
-    background-color: $second;
-    font-weight: bold;
+
+    & input {
+      outline: none;
+    }
   }
 }

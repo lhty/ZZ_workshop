@@ -24,7 +24,7 @@ const routes = [
       setPath(req.path);
       const pathIndexHTML = path.join(process.cwd(), 'dist', 'index.html');
       const template = handlebars.compile(fs.readFileSync(pathIndexHTML, 'utf8'));
-      const result = ReactDom.renderToString(<App />);
+      const result = ReactDom.renderToNodeStream(<App />);
       const page = template({
         content: result,
       });

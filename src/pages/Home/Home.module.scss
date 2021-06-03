@@ -22,7 +22,7 @@
   }
 
   @include media('>laptop') {
-    padding: 0 50px;
+    padding: 0 150px;
   }
 
   @include media('>desktop') {
@@ -44,11 +44,10 @@
   h1 {
     font-size: 72px;
     font-weight: 100;
-    line-height: 72px;
-    letter-spacing: 4px;
+    line-height: 60px;
   }
   p {
     font-size: 36px;
-    line-height: 42px;
+    line-height: 40px;
   }
 }

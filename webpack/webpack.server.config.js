@@ -10,7 +10,7 @@ module.exports = {
   },
   mode: isProd() || 'development',
   devtool: 'source-map',
-  entry: path.join(__dirname, '../src/server/server.ts'),
+  entry: path.join(__dirname, '../src/server/server.tsx'),
   output: {
     path: path.join(__dirname, '../dist/'),
     filename: 'server.js',

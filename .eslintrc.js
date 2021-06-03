@@ -32,6 +32,7 @@ module.exports = {
     'react/require-default-props': 0,
     'react/prop-types': [0, { ignore: ['children', 'className'] }],
     'no-shadow': 'off',
+    'consistent-return': ['off', { treatUndefinedAsUnspecified: false }],
     'react/jsx-props-no-spreading': [
       0,
       {
