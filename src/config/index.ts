@@ -5,7 +5,7 @@ type getterType = {
 interface IConfig {
   server: Record<string, number | string>;
   api: Record<'protocol' | 'host' | 'port', string>;
-  client: { endpoint: Record<string, getterType> };
+  client: { endpoint: Record<string, getterType>; settings: { default_item_limit: number } };
 }
 
 const config: IConfig = {
@@ -44,6 +44,9 @@ const config: IConfig = {
           pathname: '/api/v2/type/{type}',
         },
       },
+    },
+    settings: {
+      default_item_limit: 30,
     },
   },
 };

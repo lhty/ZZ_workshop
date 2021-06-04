@@ -85,7 +85,11 @@
     }
 
     & input {
+      cursor: pointer;
       outline: none;
+      &:focus {
+        outline: none;
+      }
     }
   }
 }

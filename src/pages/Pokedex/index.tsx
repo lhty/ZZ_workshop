@@ -1,5 +1,8 @@
 import React from 'react';
+
 import { setQueryParams, useQueryParams } from 'hookrouter';
+import { useStoreon } from 'storeon/react';
+import { IpokedexState, PokedexEvents, pokedex_enum, pokedex_state_fields } from '../../store/pokedex';
 
 import styles from './Pokedex.module.scss';
 
@@ -7,27 +10,12 @@ import { PokemonPage } from '..';
 import { Layout, Typography, Highlight, ContentGrid, Modal } from '../../components';
 import { useCachedData, useDebounce, useOnClickOutside, usePokedexData } from '../../hooks';
 
-interface IPokedexState {
-  search: string;
-  limit: number;
-  offset: number;
-  selected_types: Set<string>;
-}
-type PokedexReducerType = React.Reducer<IPokedexState, Partial<IPokedexState>>;
-
 const PokedexPage = () => {
   const [query_params] = useQueryParams();
-  const [{ search, selected_types, limit, offset }, dispatch] = React.useReducer<PokedexReducerType>(
-    (prev, update) => ({ ...prev, ...update }),
-    {
-      search: '',
-      selected_types: new Set(),
-      limit: 30,
-      offset: 0,
-    },
+  const { search, limit, offset, selected_types, dispatch } = useStoreon<IpokedexState, PokedexEvents>(
+    ...pokedex_state_fields,
   );
   const [debounced_search, setImmediate] = useDebounce<string>(search, 500);
-
   const {
     query: { data, isLoading, isIdle, isError, isFetching, refetch },
     types,
@@ -39,17 +27,11 @@ const PokedexPage = () => {
   });
   const cache = useCachedData();
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => dispatch({ search: e.target.value });
-
-  const handleAddType = React.useCallback((_type: string) => {
-    dispatch({
-      selected_types: selected_types.has(_type)
-        ? (selected_types.delete(_type), selected_types)
-        : selected_types.add(_type),
-    });
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => dispatch(pokedex_enum.search, e.target.value);
+  const handleAddType = React.useCallback((type: string) => {
+    dispatch(pokedex_enum.select_type, type);
     refetch();
   }, []);
-
   const modalControls = React.useMemo(
     () => ({
       onClose() {
@@ -144,13 +126,7 @@ const Filters: React.FC<IFilters> = ({ types, selected_types, handleAddType }) =
               key={type}
               onClick={() => handleAddType(type)}
               onKeyPress={() => handleAddType(type)}>
-              <input
-                tabIndex={-1}
-                id="checkbox"
-                type="checkbox"
-                checked={selected_types.has(type)}
-                onChange={() => handleAddType(type)}
-              />
+              <input tabIndex={-1} id="checkbox" readOnly type="checkbox" checked={selected_types.has(type)} />
               {type}
             </div>
           ))}
