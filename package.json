@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint -c './.eslintrc.js' --fix './src/**/*.ts'",
-    "pretty": "pretty-quick --staged",
+    "pretty-quick": "pretty-quick",
     "build:prod": "env NODE_ENV=production webpack --config webpack.config.js webpack.config.js -p --progress",
     "start": "node dist/server.js",
     "build": "webpack --config webpack.config.js --progress",

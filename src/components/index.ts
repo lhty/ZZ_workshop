@@ -14,6 +14,8 @@ import Stats from './shared/Stats';
 import Title from './shared/Title';
 import Box from './shared/Box';
 import ContentGrid from './shared/ContentGrid';
+import Search from './shared/Search';
+import Filters from './shared/Filters';
 
 export {
   Header,
@@ -31,4 +33,6 @@ export {
   Title,
   Box,
   ContentGrid,
+  Search,
+  Filters,
 };

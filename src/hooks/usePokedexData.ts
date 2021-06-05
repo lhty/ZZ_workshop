@@ -12,7 +12,7 @@ interface IusePokedexData {
 
 type PokemonDataReturnType = UseQueryResult<IPokemon[], Error>;
 
-type usePokedexDataRetunType = { query: PokemonDataReturnType; types?: string[] };
+type usePokedexDataRetunType = { query: PokemonDataReturnType; types?: string[]; overall_count?: number };
 
 export const usePokedexData = ({ limit, offset, search, types }: IusePokedexData): usePokedexDataRetunType => {
   const { data } = useQuery([cache_names.pokemon_raw], prefetchPokemonGeneralData, {
@@ -28,6 +28,7 @@ export const usePokedexData = ({ limit, offset, search, types }: IusePokedexData
         keepPreviousData: true,
       },
     ),
+    overall_count: data?.pokemon_count,
     types: data?.types,
   };
 };

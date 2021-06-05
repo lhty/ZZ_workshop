@@ -1,13 +1,13 @@
 import React from 'react';
+import { useQueryParams } from 'hookrouter';
 
 import { Box, Sprite, Stats, Title, TypeLabels, Typography } from '../../components';
 import { useDebounce, usePokemonData } from '../../hooks';
 
 import styles from './Pokemon.module.scss';
 
-const PokemonPage: React.FC<{
-  id: number;
-}> = ({ id }) => {
+const PokemonPage: React.FC = () => {
+  const [{ id }] = useQueryParams();
   const [debounced_id] = useDebounce<number>(Number(id), 300);
   const { data, isFetching, isError } = usePokemonData(debounced_id);
 

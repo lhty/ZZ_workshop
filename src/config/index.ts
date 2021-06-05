@@ -46,7 +46,7 @@ const config: IConfig = {
       },
     },
     settings: {
-      default_item_limit: 30,
+      default_item_limit: 21,
     },
   },
 };

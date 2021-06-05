@@ -1,9 +1,9 @@
 import { StoreonModule } from 'storeon';
 import config from '../config';
 
-export enum pokedex_enum {
-  search = 'pokedex/search',
-  select_type = 'pokedex/select_type',
+export enum pokedex_state_enum {
+  search = 'search',
+  select_type = 'select_type',
 }
 
 export interface IpokedexState {
@@ -13,10 +13,7 @@ export interface IpokedexState {
   selected_types: Set<string>;
 }
 
-export interface PokedexEvents {
-  [pokedex_enum.search]: string;
-  [pokedex_enum.select_type]: string;
-}
+export type PokedexEvents = Record<keyof typeof pokedex_state_enum, string>;
 
 const InitialPokedexState: IpokedexState = {
   search: '',
@@ -28,14 +25,14 @@ const InitialPokedexState: IpokedexState = {
 export const pokedex: StoreonModule<IpokedexState, PokedexEvents> = (store) => {
   store.on('@init', () => InitialPokedexState);
 
-  store.on(pokedex_enum.search, (_, search) => ({ search }));
+  store.on(pokedex_state_enum.search, (_, search) => ({ search }));
 
-  store.on(pokedex_enum.select_type, ({ selected_types }, type) => {
+  store.on(pokedex_state_enum.select_type, ({ selected_types }, type) => {
     if (selected_types.has(type)) {
       selected_types.delete(type);
-      return { selected_types };
+    } else {
+      selected_types.add(type);
     }
-    selected_types.add(type);
     return { selected_types };
   });
 };

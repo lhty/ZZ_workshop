@@ -1,4 +1,5 @@
 import React from 'react';
+import { setQueryParams, useQueryParams } from 'hookrouter';
 import { createPortal } from 'react-dom';
 
 import { usePortal } from '../../hooks';
@@ -6,54 +7,61 @@ import { usePortal } from '../../hooks';
 import { ReactComponent as CloseButton } from './assets/closeIcon.svg';
 import styles from './Modal.module.scss';
 
-const noop = () => {};
 interface IModal {
-  id?: string;
-  isVisible?: boolean;
-  onClose: () => void;
+  el_id?: string;
+  isOpen?: boolean;
+  onClose?: () => void;
   onNext?: () => void;
   onPrev?: () => void;
 }
 
-const Modal: React.FC<IModal> = ({
-  children,
-  id = 'modal card',
-  isVisible = false,
-  onClose,
-  onNext = noop,
-  onPrev = noop,
-}) => {
-  const [target] = usePortal(id, styles.root, isVisible);
+const Modal: React.FC<IModal> = ({ children, el_id = 'modal card', isOpen = false, onClose, onNext, onPrev }) => {
+  const [{ id, ...params }] = useQueryParams();
+  const [target] = usePortal(el_id, styles.root, isOpen || !!id);
+  const modalControls = React.useMemo(
+    () => ({
+      onClose(params: Record<string, string>) {
+        setQueryParams(params, true);
+      },
+      onNext(id: string) {
+        setQueryParams({ id: Number(id) + 1 });
+      },
+      onPrev(id: string) {
+        setQueryParams({ id: Math.max(1, Number(id) - 1) });
+      },
+    }),
+    [],
+  );
 
   React.useEffect(() => {
-    if (!isVisible) {
+    if (!id) {
       return;
     }
     const close = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        modalControls.onClose(params);
       }
       if (e.key === 'ArrowRight') {
-        onNext();
+        modalControls.onNext(id);
       }
       if (e.key === 'ArrowLeft') {
-        onPrev();
+        modalControls.onPrev(id);
       }
     };
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
-  }, [isVisible, onClose, onNext, onPrev]);
+  }, [id, params, modalControls]);
 
   const wrapper = (
     <div className={styles.wrapper}>
-      <CloseButton type="button" className={styles.close} onClick={onClose}>
+      <CloseButton type="button" className={styles.close} onClick={() => modalControls.onClose(params)}>
         Close
       </CloseButton>
       {children}
     </div>
   );
 
-  return isVisible ? createPortal(wrapper, target) : null;
+  return id ? createPortal(wrapper, target) : null;
 };
 
 export default Modal;
