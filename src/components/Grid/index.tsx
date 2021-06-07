@@ -1,5 +1,4 @@
 import React from 'react';
-import { setQueryParams } from 'hookrouter';
 import { Typography, Card } from '..';
 import { range } from '../../lib';
 import styles from './ContentGrid.module.scss';
@@ -22,27 +21,13 @@ const ContentGrid: React.FC<IContentGrid> = ({ data, isLoading, isIdle, isError,
     return <Typography>Nothing found :(</Typography>;
   }
 
-  const setIdHandler = (e: React.MouseEvent | React.KeyboardEvent) => {
-    setQueryParams({ id: e.currentTarget.getAttribute('data-id') });
-  };
-
   return (
     <div className={styles.contentWrap}>
       {!isFetching
-        ? data?.map((pokemon) => (
-            <div
-              data-id={pokemon.id}
-              tabIndex={0}
-              role="link"
-              onClick={setIdHandler}
-              onKeyPress={setIdHandler}
-              key={pokemon.id}>
-              <Card {...pokemon} />
-            </div>
-          ))
+        ? data?.map((pokemon) => <Card key={pokemon.id} {...pokemon} />)
         : range(0, 20).map((skeleton) => <Card key={skeleton} />)}
     </div>
   );
 };
 
-export default ContentGrid;
+export default React.memo(ContentGrid);

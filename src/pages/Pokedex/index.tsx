@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 
 import { useStoreon } from 'storeon/react';
@@ -10,26 +12,34 @@ import { Layout, Typography, Highlight, ContentGrid, Modal, Search, Filters } fr
 import { useDebounce, usePokedexData } from '../../hooks';
 
 const PokedexPage = () => {
-  const { search, limit, offset, selected_types, dispatch } = useStoreon<IpokedexState, PokedexEvents>(
+  const { search, limit, offset, selected_types, selected_id, dispatch } = useStoreon<IpokedexState, PokedexEvents>(
     ...pokedex_state_fields,
   );
   const [debounced_search] = useDebounce(search, 500);
   const {
     query: { data, isLoading, isIdle, isError, isFetching },
     overall_count,
-    types,
+    available_types,
   } = usePokedexData({
     limit,
     offset,
     search: debounced_search,
-    types: selected_types,
+    selected_types,
   });
 
-  const handleAddType = (type: string) => dispatch(pokedex_state_enum.select_type, type);
-
+  const handleAddType = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const { type, id } = (e.target as HTMLInputElement).dataset;
+    if (id) {
+      dispatch(pokedex_state_enum.selected_id, id);
+    }
+    if (!id && type) {
+      dispatch(pokedex_state_enum.selected_types, type);
+    }
+  };
   return (
-    <main className={styles.root}>
-      <Modal>
+    <main onClick={handleAddType} className={styles.root}>
+      <Modal isOpen={!!selected_id}>
         <PokemonPage />
       </Modal>
       <Layout className={styles.layerWrap}>
@@ -38,7 +48,7 @@ const PokedexPage = () => {
           for you to choose your favorite
         </Typography>
         <Search />
-        <Filters {...{ types, selected_types, handleAddType }} />
+        <Filters {...{ available_types }} />
         <ContentGrid
           {...{
             data,

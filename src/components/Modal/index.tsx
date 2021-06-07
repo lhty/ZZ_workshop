@@ -1,5 +1,4 @@
 import React from 'react';
-import { setQueryParams, useQueryParams } from 'hookrouter';
 import { createPortal } from 'react-dom';
 
 import { usePortal } from '../../hooks';
@@ -7,6 +6,7 @@ import { usePortal } from '../../hooks';
 import { ReactComponent as CloseButton } from './assets/closeIcon.svg';
 import styles from './Modal.module.scss';
 
+const noop = () => null;
 interface IModal {
   el_id?: string;
   isOpen?: boolean;
@@ -15,53 +15,42 @@ interface IModal {
   onPrev?: () => void;
 }
 
-const Modal: React.FC<IModal> = ({ children, el_id = 'modal card', isOpen = false, onClose, onNext, onPrev }) => {
-  const [{ id, ...params }] = useQueryParams();
-  const [target] = usePortal(el_id, styles.root, isOpen || !!id);
-  const modalControls = React.useMemo(
-    () => ({
-      onClose(params: Record<string, string>) {
-        setQueryParams(params, true);
-      },
-      onNext(id: string) {
-        setQueryParams({ id: Number(id) + 1 });
-      },
-      onPrev(id: string) {
-        setQueryParams({ id: Math.max(1, Number(id) - 1) });
-      },
-    }),
-    [],
-  );
+const Modal: React.FC<IModal> = ({
+  children,
+  el_id = 'modal card',
+  isOpen = false,
+  onClose = noop,
+  onNext = noop,
+  onPrev = noop,
+}) => {
+  const [target] = usePortal(el_id, styles.root, isOpen);
 
   React.useEffect(() => {
-    if (!id) {
-      return;
-    }
     const close = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        modalControls.onClose(params);
+        onClose();
       }
       if (e.key === 'ArrowRight') {
-        modalControls.onNext(id);
+        onNext();
       }
       if (e.key === 'ArrowLeft') {
-        modalControls.onPrev(id);
+        onPrev();
       }
     };
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
-  }, [id, params, modalControls]);
+  }, []);
 
   const wrapper = (
     <div className={styles.wrapper}>
-      <CloseButton type="button" className={styles.close} onClick={() => modalControls.onClose(params)}>
+      <CloseButton type="button" className={styles.close} onClick={onClose}>
         Close
       </CloseButton>
       {children}
     </div>
   );
 
-  return id ? createPortal(wrapper, target) : null;
+  return isOpen ? createPortal(wrapper, target) : null;
 };
 
 export default Modal;

@@ -23,6 +23,13 @@
 .card {
   border-radius: $card_radius;
   box-shadow: $base_shadow;
+
+  &_id {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
 }
 .label {
   height: 15px;
@@ -37,6 +44,7 @@
   align-items: center;
   border-radius: $label_radius;
   box-shadow: $label_shadow;
+  cursor: pointer;
 
   &:last-child {
     margin-right: 0;
