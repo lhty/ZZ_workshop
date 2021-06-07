@@ -3,6 +3,7 @@
 interface CssExports {
   card: string;
   infoWrap: string;
+  pictureWrap: string;
 }
 export const cssExports: CssExports;
 export default cssExports;

@@ -13,7 +13,7 @@ const Card: React.FC<Partial<IPokemon>> = ({ id, name, stats, sprites, types }) 
         <Stats stats={stats} />
         <TypeLabels types={types} />
       </div>
-      <Sprite {...{ sprites, types, name }} />
+      <Sprite className={styles.pictureWrap} {...{ sprites, types, name }} />
     </Box>
   );
 };

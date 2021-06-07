@@ -10,22 +10,19 @@ const noop = () => null;
 interface IModal {
   el_id?: string;
   isOpen?: boolean;
-  onClose?: () => void;
-  onNext?: () => void;
-  onPrev?: () => void;
+  controls?: { onClose: () => void; onNext: () => void; onPrev: () => void };
 }
 
 const Modal: React.FC<IModal> = ({
   children,
   el_id = 'modal card',
   isOpen = false,
-  onClose = noop,
-  onNext = noop,
-  onPrev = noop,
+  controls = { onClose: noop, onNext: noop, onPrev: noop },
 }) => {
   const [target] = usePortal(el_id, styles.root, isOpen);
 
   React.useEffect(() => {
+    const { onClose, onNext, onPrev } = controls;
     const close = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
@@ -39,11 +36,11 @@ const Modal: React.FC<IModal> = ({
     };
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
-  }, []);
+  }, [controls]);
 
   const wrapper = (
     <div className={styles.wrapper}>
-      <CloseButton type="button" className={styles.close} onClick={onClose}>
+      <CloseButton type="button" className={styles.close} onClick={controls.onClose}>
         Close
       </CloseButton>
       {children}

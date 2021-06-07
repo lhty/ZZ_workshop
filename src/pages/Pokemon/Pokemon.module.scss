@@ -19,7 +19,9 @@
   min-height: #{'min(50vh, 350px)'};
 }
 .pictureWrap {
-  width: 100%;
+  @include media('>=tablet') {
+    width: 100%;
+  }
 }
 .labelWrap {
   justify-content: flex-start;

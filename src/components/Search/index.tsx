@@ -12,7 +12,7 @@ const Search: React.FC = () => {
     <input
       onChange={handleSearch}
       value={search}
-      spellCheck="false"
+      spellCheck={false}
       placeholder="Find your pokémon..."
       className={styles.search}
       type="text"
