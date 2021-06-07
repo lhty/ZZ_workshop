@@ -2,11 +2,8 @@
 // Please do not change this file!
 interface CssExports {
   description: string;
-  filters: string;
-  filters_dropdown: string;
   layerWrap: string;
   root: string;
-  search: string;
 }
 export const cssExports: CssExports;
 export default cssExports;

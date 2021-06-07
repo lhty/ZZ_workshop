@@ -1,10 +1,7 @@
-@import '../../styles/breakpoints';
-
 .root {
   width: 100%;
   height: 680px;
   position: relative;
-  margin-right: -159px;
 }
 
 .smallPokeBall {
@@ -14,30 +11,26 @@
 
 .cloud {
   position: absolute;
-  left: 3%;
-  bottom: 39.22%;
+  left: 10%;
+  bottom: 40%;
 }
 
 .cloudBig {
   position: absolute;
-  left: 39.86%;
-  top: 4%;
+  left: 65%;
+  top: 5%;
   transform: scale(1.4);
 }
 
 .pokeBall {
-  position: fixed;
+  position: absolute;
   top: 10%;
-  right: 0;
+  right: 0%;
   pointer-events: none;
 }
 
 .pikachu {
   position: absolute;
   top: 0%;
-  left: 15%;
-
-  @include media('>laptop') {
-    left: 5%;
-  }
+  right: 25%;
 }

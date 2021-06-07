@@ -1,13 +1,15 @@
 import React from 'react';
 
+import { useStoreon } from 'storeon/react';
+import { IpokedexState, PokedexEvents, pokedex_state_enum } from '../../store/pokedex';
+
 import { Box, Sprite, Stats, Title, TypeLabels, Typography } from '../../components';
 import { useDebounce, usePokemonData } from '../../hooks';
 
 import styles from './Pokemon.module.scss';
 
-const PokemonPage: React.FC<{
-  id: number;
-}> = ({ id }) => {
+const PokemonPage: React.FC = () => {
+  const { selected_id: id } = useStoreon<IpokedexState, PokedexEvents>(pokedex_state_enum.selected_id);
   const [debounced_id] = useDebounce<number>(Number(id), 300);
   const { data, isFetching, isError } = usePokemonData(debounced_id);
 

@@ -6,29 +6,26 @@ import { usePortal } from '../../hooks';
 import { ReactComponent as CloseButton } from './assets/closeIcon.svg';
 import styles from './Modal.module.scss';
 
-const noop = () => {};
+const noop = () => null;
 interface IModal {
-  id?: string;
-  isVisible?: boolean;
-  onClose: () => void;
+  el_id?: string;
+  isOpen?: boolean;
+  onClose?: () => void;
   onNext?: () => void;
   onPrev?: () => void;
 }
 
 const Modal: React.FC<IModal> = ({
   children,
-  id = 'modal card',
-  isVisible = false,
-  onClose,
+  el_id = 'modal card',
+  isOpen = false,
+  onClose = noop,
   onNext = noop,
   onPrev = noop,
 }) => {
-  const [target] = usePortal(id, styles.root, isVisible);
+  const [target] = usePortal(el_id, styles.root, isOpen);
 
   React.useEffect(() => {
-    if (!isVisible) {
-      return;
-    }
     const close = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
@@ -42,7 +39,7 @@ const Modal: React.FC<IModal> = ({
     };
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
-  }, [isVisible, onClose, onNext, onPrev]);
+  }, []);
 
   const wrapper = (
     <div className={styles.wrapper}>
@@ -53,7 +50,7 @@ const Modal: React.FC<IModal> = ({
     </div>
   );
 
-  return isVisible ? createPortal(wrapper, target) : null;
+  return isOpen ? createPortal(wrapper, target) : null;
 };
 
 export default Modal;

@@ -22,20 +22,22 @@
   }
 
   @include media('>laptop') {
-    padding: 0 150px;
+    padding-left: 150px;
   }
 
   @include media('>desktop') {
-    padding: 0 250px;
+    padding-left: 250px;
   }
 }
 .contentText {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-flow: column wrap;
   align-items: flex-start;
   align-self: center;
   gap: 30px;
-  max-width: 50%;
+  max-width: 65%;
   min-width: 514px;
   font-family: Karla;
   font-style: normal;

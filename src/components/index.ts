@@ -7,13 +7,15 @@ import Typography from './Typography';
 import Card from './Card';
 import Highlight from './Typography/Highlight';
 import Modal from './Modal';
+import Filters from './Filters';
+import Search from './Search';
+import ContentGrid from './Grid';
+import Box from './Box';
 
 import TypeLabels from './shared/TypeLables';
 import Sprite from './shared/Sprite';
 import Stats from './shared/Stats';
 import Title from './shared/Title';
-import Box from './shared/Box';
-import ContentGrid from './shared/ContentGrid';
 
 export {
   Header,
@@ -31,4 +33,6 @@ export {
   Title,
   Box,
   ContentGrid,
+  Search,
+  Filters,
 };

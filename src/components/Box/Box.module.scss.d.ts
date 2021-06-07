@@ -3,6 +3,7 @@
 interface CssExports {
   bug: string;
   card: string;
+  card_id: string;
   dark: string;
   default: string;
   dragon: string;

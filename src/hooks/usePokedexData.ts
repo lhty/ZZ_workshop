@@ -7,28 +7,33 @@ interface IusePokedexData {
   search?: string;
   limit: number;
   offset: number;
-  types?: Set<string>;
+  selected_types?: Set<string>;
 }
 
 type PokemonDataReturnType = UseQueryResult<IPokemon[], Error>;
 
-type usePokedexDataRetunType = { query: PokemonDataReturnType; types?: string[] };
+type usePokedexDataRetunType = { query: PokemonDataReturnType; available_types?: string[]; overall_count?: number };
 
-export const usePokedexData = ({ limit, offset, search, types }: IusePokedexData): usePokedexDataRetunType => {
+export const usePokedexData = ({ limit, offset, search, selected_types }: IusePokedexData): usePokedexDataRetunType => {
   const { data } = useQuery([cache_names.pokemon_raw], prefetchPokemonGeneralData, {
     keepPreviousData: true,
   });
 
   return {
     query: useQuery(
-      [cache_names.pokemon_data, { search, limit, offset, types }],
-      () => getPokedexData({ data: data?.names, limit, offset, search, types }),
+      [
+        cache_names.pokemon_data,
+        { search, limit, offset, selected_types: selected_types && Array.from(selected_types.values()) },
+      ],
+      () => getPokedexData({ data: data?.names, limit, offset, search, selected_types }),
       {
-        enabled: !!data || !!types?.size,
+        enabled: !!data,
+        refetchOnWindowFocus: false,
         keepPreviousData: true,
       },
     ),
-    types: data?.types,
+    overall_count: data?.pokemon_count,
+    available_types: data?.types,
   };
 };
 
@@ -41,10 +46,10 @@ const getPokedexData = async ({
   limit,
   offset,
   search,
-  types,
+  selected_types,
 }: IgetPokedexData): Promise<IPokemon | IPokemon[]> => {
-  if (types?.size) {
-    data = await getPokemonsByTypes(types);
+  if (selected_types?.size) {
+    data = await getPokemonsByTypes(selected_types);
   }
 
   if (search) {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint -c './.eslintrc.js' --fix './src/**/*.ts'",
-    "pretty": "pretty-quick --staged",
+    "pretty-quick": "pretty-quick",
     "build:prod": "env NODE_ENV=production webpack --config webpack.config.js webpack.config.js -p --progress",
     "start": "node dist/server.js",
     "build": "webpack --config webpack.config.js --progress",
@@ -23,6 +23,7 @@
     "react-dom": "^17.0.2",
     "react-query": "^3.16.0",
     "react-query-devtools": "^3.0.0-beta.1",
+    "storeon": "^3.1.4",
     "url": "^0.11.0"
   },
   "devDependencies": {
@@ -68,7 +69,7 @@
     "url-loader": "^4.1.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.2",
+    "webpack-dev-server": "^3.7.2",
     "webpack-node-externals": "^3.0.0"
   },
   "husky": {

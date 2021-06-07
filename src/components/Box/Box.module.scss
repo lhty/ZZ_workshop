@@ -3,6 +3,7 @@
 @each $key, $value in $bgColors {
   .#{$key} {
     background-color: $value;
+    color: darken($value, 50%);
   }
   .gradient_#{$key} {
     background: linear-gradient(270deg, $value 0.15%, transparent 100%);
@@ -22,21 +23,28 @@
 .card {
   border-radius: $card_radius;
   box-shadow: $base_shadow;
+
+  &_id {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
 }
 .label {
   height: 15px;
   min-width: 60px;
   font-style: normal;
-  font-size: 13px;
-  line-height: 13px;
+  font-size: 14px;
+  line-height: 14px;
   text-align: center;
-  color: $dark;
-  padding: 10px 5px;
+  padding: 11px 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: $label_radius;
   box-shadow: $label_shadow;
+  cursor: pointer;
 
   &:last-child {
     margin-right: 0;
