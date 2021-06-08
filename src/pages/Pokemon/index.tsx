@@ -10,7 +10,7 @@ import styles from './Pokemon.module.scss';
 
 const PokemonPage: React.FC = () => {
   const { selected_id: id } = useStoreon<IpokedexState, PokedexEvents>(pokedex_state_enum.selected_id);
-  const [debounced_id] = useDebounce<number>(Number(id), 300);
+  const [debounced_id] = useDebounce<number>(Number(id), 200);
   const { data, isFetching, isError } = usePokemonData(debounced_id);
 
   if (!isFetching && isError) {

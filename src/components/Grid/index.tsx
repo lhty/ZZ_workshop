@@ -24,7 +24,7 @@ const ContentGrid: React.FC<IContentGrid> = ({ data, isLoading, isIdle, isError,
   return (
     <div className={styles.contentWrap}>
       {!isFetching
-        ? data?.map((pokemon) => <Card key={pokemon.id} {...pokemon} />)
+        ? data?.map((pokemon) => <Card key={pokemon.id + pokemon.name} {...pokemon} />)
         : range(0, 20).map((skeleton) => <Card key={skeleton} />)}
     </div>
   );

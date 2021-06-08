@@ -4,6 +4,4 @@ export { useDebounce } from './useDebounce';
 export { usePortal } from './usePortal';
 export { usePokedexData } from './usePokedexData';
 export { usePokemonData } from './usePokemonData';
-export { useCachedData } from './useCachedData';
 export { useOnClickOutside } from './useOnClickOutside';
-export { useSetQueryParams } from './useSetQueryParams';

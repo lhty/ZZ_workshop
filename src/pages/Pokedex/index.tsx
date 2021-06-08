@@ -7,7 +7,7 @@ import styles from './Pokedex.module.scss';
 
 import { PokemonPage } from '..';
 import { Layout, Typography, Highlight, ContentGrid, Modal, Search, Filters } from '../../components';
-import { useDebounce, usePokedexData, useSetQueryParams } from '../../hooks';
+import { useDebounce, usePokedexData } from '../../hooks';
 
 const PokedexPage = () => {
   const { search, limit, offset, selected_types, selected_id, dispatch } = useStoreon<IpokedexState, PokedexEvents>(
@@ -24,7 +24,6 @@ const PokedexPage = () => {
     search: debounced_search,
     selected_types,
   });
-  useSetQueryParams({ s: search, id: selected_id });
   const handleAddType = (e: React.MouseEvent | React.KeyboardEvent<HTMLElement>) => {
     e.stopPropagation();
     const { type, id } = (e.target as HTMLInputElement).dataset;
@@ -45,7 +44,7 @@ const PokedexPage = () => {
         dispatch(pokedex_state_enum.selected_id, Number(selected_id) + 1);
       },
       onPrev() {
-        dispatch(pokedex_state_enum.selected_id, Number(selected_id) - 1);
+        dispatch(pokedex_state_enum.selected_id, Math.max(1, Number(selected_id) - 1));
       },
     }),
     [selected_id, dispatch],
